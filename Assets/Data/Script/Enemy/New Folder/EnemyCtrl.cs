@@ -12,8 +12,9 @@ public class EnemyCtrl : SaiMonoBehaviour
     public EnemyAttack EnemyAttack => enemyAttack;
     [SerializeField] protected EnemyDamageReciver enemyDamageReciver;
     public EnemyDamageReciver EnemyDamageReciver => enemyDamageReciver;
-   /* [SerializeField] protected EnemyMovement enemyMovement;
-    public EnemyMovement EnemyMovement => enemyMovement;*/
-
+    /* [SerializeField] protected EnemyMovement enemyMovement;
+     public EnemyMovement EnemyMovement => enemyMovement;*/
+    [SerializeField] protected ShootableObjectSO shootableObject;
+    public ShootableObjectSO ShootableObject => shootableObject;
 
 }

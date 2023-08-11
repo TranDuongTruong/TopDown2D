@@ -8,6 +8,7 @@ public class GhostMovement : SaiMonoBehaviour
     
 
     [SerializeField] float moveSpeed = 1;
+    [SerializeField] float scale = .5f;
     [SerializeField] List <Transform> waypoints; 
     [SerializeField] PointCtrl waypointCtrl;
     private int currentWaypointIndex = 0; 
@@ -46,7 +47,8 @@ public class GhostMovement : SaiMonoBehaviour
         {
             ghostCtrl.EnemyModelCtrl.ChangeModel("Run");
             moveSpeed = 1;
-            MoveToWaypoint();
+            ChasePlayer();
+            //MoveToWaypoint();
         }
     }
 
@@ -63,11 +65,11 @@ public class GhostMovement : SaiMonoBehaviour
         Vector2 direction = ghostCtrl.playerControler.transform.position - transform.parent.position;
         if (direction.x < 0) // Player is on the left side of Ghost
         {
-            transform.parent.localScale = new Vector3(-1, 1, 1); // Flip the Ghost to face left
+            transform.parent.localScale = new Vector3(-scale, scale, scale); // Flip the Ghost to face left
         }
         else // Player is on the right side of Ghost
         {
-            transform.parent.localScale = new Vector3(1, 1, 1); // Flip the Ghost to face right
+            transform.parent.localScale = new Vector3(scale, scale, scale); // Flip the Ghost to face right
         }
 
         transform.parent.position = Vector2.MoveTowards(transform.parent.position, ghostCtrl.playerControler.transform.position, Time.deltaTime * moveSpeed);
@@ -93,8 +95,8 @@ public class GhostMovement : SaiMonoBehaviour
                 Vector2 direction = targetPosition - (Vector2)transform.parent.position;
                 transform.parent.position += (Vector3)direction.normalized * moveSpeed * Time.deltaTime;
             }
-            if(targetPosition.x < transform.parent.position.x) transform.parent.localScale=new Vector3(-1, 1, 1);
-            else if (targetPosition.x > transform.parent.position.x) transform.parent.localScale = new Vector3(1, 1, 1);
+            if(targetPosition.x < transform.parent.position.x) transform.parent.localScale=new Vector3(-scale, scale, scale);
+            else if (targetPosition.x > transform.parent.position.x) transform.parent.localScale = new Vector3(scale, scale, scale);
         }
     }
     

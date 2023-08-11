@@ -5,14 +5,25 @@ using UnityEngine;
 public class EnemySpawner : Spawner
 {
     [SerializeField] public PointCtrl pointCtrl;
-    protected override void LoadComponents()
+    [SerializeField] public PlayerControler playerControler;
+    [SerializeField]   public float timeLimit=5f;
+    [SerializeField] public float time = 0;
+
+   protected override void LoadComponents()
     {
-        base.LoadComponents(); LoadPoints();
+        base.LoadComponents(); LoadPlayer(); LoadPoints();
+    }
+    protected virtual void LoadPlayer()
+    {
+        if (playerControler == null)
+        {
+            playerControler = Transform.FindObjectOfType<PlayerControler>();
+        }
     }
     protected virtual void LoadPoints()
     {
         if (pointCtrl != null) return;
-        pointCtrl=transform.GetComponentInChildren<PointCtrl>();
+        pointCtrl=playerControler.transform.GetComponentInChildren<PointCtrl>();
     }
     protected override void Start()
     {
@@ -25,7 +36,18 @@ public class EnemySpawner : Spawner
         {
             int index = Random.Range(0, pointCtrl.Waypoints.Count-1);
             Transform newEnemy = Spawn(name, pointCtrl.Waypoints[index].position, Quaternion.identity);
+            newEnemy.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             newEnemy.gameObject.SetActive(true);
         }
+    }
+    private void Update()
+    {
+        time+=Time.deltaTime;
+        if (time > timeLimit)
+        {
+            SpawnEnemy("Ghost", 5);
+            time=0;
+        }
+
     }
 }

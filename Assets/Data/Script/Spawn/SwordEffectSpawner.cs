@@ -8,8 +8,17 @@ public class SwordEffectSpawner : Spawner
     public static SwordEffectSpawner Instance => instance;
 
     public string effectHorizontal= "FileHorizontal";
+    public string effectTopLeft= "FileTopLeft";
+    public Quaternion rotTopLeft;
+    public string effectTopRight= "FileTopRight";
+    public Quaternion rotTopRight;
+    public string effectDownRight= "FileDownRight";
+    public Quaternion rotDownRight;
+    public string effectDownLeft= "FileDownLeft";
+    public Quaternion rotDownLeft;
     public string effectTop="FileTop";
     public string effectDown="FileDown";
+
 
     protected override void Awake()
     {

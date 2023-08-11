@@ -92,7 +92,7 @@ public abstract class Spawner : SaiMonoBehaviour
 
     public virtual void Despawn(Transform obj)
     {
-        Debug.Log("aaa"+obj.name);
+        
         this.poolObjs.Add(obj);
         obj.gameObject.SetActive(false);
         this.spawnedCount--;

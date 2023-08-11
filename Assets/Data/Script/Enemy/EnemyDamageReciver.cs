@@ -24,16 +24,23 @@ public class EnemyDamageReciver : DamageReceiver
     }
     protected override void OnDead()
     {
-      //  enemy.animator.SetBool("isDead", true);
+        //  enemy.animator.SetBool("isDead", true);
+        OnDeadDrop();
         Destroy(transform.parent.gameObject);
+
+    }
+    protected virtual void OnDeadDrop()
+    {
+        Vector3 dropPos = transform.position;
+        Quaternion dropRot = transform.rotation;
+        ItemDropSpawner.Instance.Drop(this.enemy.ShootableObject.dropList, dropPos, dropRot);
     }
 
-   
 
-   
 
-    
 
-  
+
+
+
 
 }

@@ -103,7 +103,28 @@ public class SowrdAttack : SaiMonoBehaviour
             else if (effectName == effectSpawner.effectDown)
             {
                 fileControler.fileFly.SetDirection(new Vector3(0, -1, 0));
-            } 
+            } else if (effectName == effectSpawner.effectDownLeft)
+            {
+                //newEffect.rotation=new Quaternion(0, 0, -135, 0);
+               // newEffect.rotation = Quaternion.Euler(new Vector3(0, 0, -135));
+                fileControler.fileFly.SetDirection(new Vector3(-1, -1, 0));
+            }
+            else if (effectName == effectSpawner.effectDownRight)
+            {
+             //   newEffect.rotation = new Quaternion(0, 0, -45, 0);
+               // newEffect.rotation = Quaternion.Euler(new Vector3(0, 0, -45));
+                fileControler.fileFly.SetDirection(new Vector3(1, -1, 0));
+            }
+            else if (effectName == effectSpawner.effectTopLeft)
+            {
+               // newEffect.rotation = Quaternion.Euler(new Vector3(0, 0, 135));
+                fileControler.fileFly.SetDirection(new Vector3(-1, 1, 0));
+            }
+            else if (effectName == effectSpawner.effectTopRight)
+            {
+                //newEffect.rotation = Quaternion.Euler(new Vector3(0, 0, 45));
+                fileControler.fileFly.SetDirection(new Vector3(1, 1, 0));
+            }
         }
 
     }

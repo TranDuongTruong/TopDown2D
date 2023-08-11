@@ -11,7 +11,11 @@ public class PlayerDamageReciver : DamageReceiver
     {
         throw new System.NotImplementedException();
     }
-
+    public void IncreaseHP(float hp, float maxHp)
+    {
+        this.hp += hp;
+        this.hpMax += maxHp;
+    }
     protected override void LoadComponents()
     {
         base.LoadComponents();

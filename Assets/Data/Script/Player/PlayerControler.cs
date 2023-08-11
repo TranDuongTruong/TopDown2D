@@ -21,8 +21,11 @@ public class PlayerControler : SaiMonoBehaviour
     public SowrdAttack sowrdAttack;
     [SerializeField] PlayerDamageReciver damageReciver;
     public PlayerDamageReciver DamageReciver => damageReciver;
+    [SerializeField] Inventory inventory;
+    public Inventory Inventory => inventory;
 
-
+    [SerializeField] PlayerStatus playerStatus;
+    public PlayerStatus PlayerStatus => playerStatus;
     protected override void Start()
     {
         rb=GetComponent<Rigidbody2D>();
@@ -31,12 +34,22 @@ public class PlayerControler : SaiMonoBehaviour
     }
     protected override void LoadComponents()
     {
-        base.LoadComponents(); LoadPlayerDamageReciver();
+        base.LoadComponents(); LoadPlayerDamageReciver(); LoadInventory(); LoadPlayerStatus();
     }
     protected void LoadPlayerDamageReciver()
     {
         if (damageReciver != null) return;
         damageReciver=transform.GetComponentInChildren<PlayerDamageReciver>();
+    }
+    protected void LoadInventory()
+    {
+        if (inventory != null) return;
+        inventory = transform.GetComponentInChildren<Inventory>();
+    }
+    protected void LoadPlayerStatus()
+    {
+        if (playerStatus != null) return;
+        playerStatus = transform.GetComponentInChildren<PlayerStatus>();
     }
     private void FixedUpdate()
     {
@@ -175,18 +188,18 @@ public class PlayerControler : SaiMonoBehaviour
     {
         if (!isRunning)
         {
-            moveSpeed = 3f;
-            if (power < maxPower)
+            moveSpeed = playerStatus.speed;
+            if (power < playerStatus.maxPower)
             {
                 power += Time.deltaTime;
             }
         }
         else if (power > 0 && isRunning)
         {
-            moveSpeed = 5f;
+            moveSpeed = playerStatus.maxSpeed;
             power -= 10 * Time.deltaTime;
         }
-        else moveSpeed = 3f;
+        else moveSpeed = playerStatus.speed;
     }
     public void SwordAttack()
     {
@@ -197,7 +210,8 @@ public class PlayerControler : SaiMonoBehaviour
             else
             if (spriteRenderer.flipX) sowrdAttack.AttackRight();
             else if(!spriteRenderer.flipX) sowrdAttack.AttackLeft();
-        } else if (movementInput.x > 0)
+        } else        
+        if (movementInput.x > 0)
         {
             sowrdAttack.AttackLeft();
         }
@@ -225,14 +239,39 @@ public class PlayerControler : SaiMonoBehaviour
     }
     public void AttackEffectHorizontal()
     {
-        sowrdAttack.AttackEffect(SwordEffectSpawner.Instance.effectHorizontal);
+       if( !CrossEffect())  sowrdAttack.AttackEffect(SwordEffectSpawner.Instance.effectHorizontal);
+
     }
+
+    private bool CrossEffect()
+    {
+        if (movementInput.y > 0 && movementInput.x > 0)
+        {
+            sowrdAttack.AttackEffect(SwordEffectSpawner.Instance.effectTopRight);
+            return true;
+        }
+        else if (movementInput.y > 0 && movementInput.x < 0)
+        {
+            sowrdAttack.AttackEffect(SwordEffectSpawner.Instance.effectTopLeft); return true;
+        }
+        else if (movementInput.y < 0 && movementInput.x < 0)
+        {
+            sowrdAttack.AttackEffect(SwordEffectSpawner.Instance.effectDownLeft); return true;
+        }
+        else if (movementInput.y < 0 && movementInput.x > 0)
+        {
+            sowrdAttack.AttackEffect(SwordEffectSpawner.Instance.effectDownRight); return true;
+        }
+
+        return false;
+    }
+
     public void AttackEffectTop()
     {
-        sowrdAttack.AttackEffect(SwordEffectSpawner.Instance.effectTop);
+        if (!CrossEffect()) sowrdAttack.AttackEffect(SwordEffectSpawner.Instance.effectTop);
     }
     public void AttackEffectDown()
     {
-        sowrdAttack.AttackEffect(SwordEffectSpawner.Instance.effectDown);
+        if (!CrossEffect()) sowrdAttack.AttackEffect(SwordEffectSpawner.Instance.effectDown);
     }
 }

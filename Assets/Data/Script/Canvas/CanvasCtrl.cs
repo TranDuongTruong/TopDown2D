@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class CanvasCtrl : SaiMonoBehaviour
 {
    [SerializeField] PlayerControler playerControler;
-    [SerializeField] Slider hpBar, powerBar;
+    [SerializeField] Slider hpBar, powerBar,expBar;
     protected override void LoadComponents()
     {
         base.LoadComponents(); LoadPlayer(); LoadSlider(); SetIntialValue();
@@ -24,6 +24,7 @@ public class CanvasCtrl : SaiMonoBehaviour
         {
             if (point.name == "HP") hpBar = point.GetComponent<Slider>();
             if (point.name == "Power") powerBar = point.GetComponent<Slider>();
+            if (point.name == "ExpBar") expBar = point.GetComponent<Slider>();
 
         }
     }
@@ -31,12 +32,19 @@ public class CanvasCtrl : SaiMonoBehaviour
     {
         hpBar.maxValue = playerControler.DamageReciver.HPMax;
         hpBar.value = playerControler.DamageReciver.HP;
-        powerBar.maxValue = 100;
-        powerBar.value = 50;
+        expBar.value = playerControler.PlayerStatus.exp;
+        expBar.maxValue = playerControler.PlayerStatus.maxHp;
+        powerBar.maxValue = playerControler.PlayerStatus.maxPower;
+        powerBar.value = playerControler.PlayerStatus.maxPower;
     }
     private void Update()
     {
         hpBar.value = playerControler.DamageReciver.HP;
         powerBar.value = playerControler.power;
+        expBar.value = playerControler.PlayerStatus.exp;
+        if (expBar.value > expBar.maxValue)
+        {
+            expBar.maxValue = playerControler.PlayerStatus.maxHp;
+        }
     }
 }
