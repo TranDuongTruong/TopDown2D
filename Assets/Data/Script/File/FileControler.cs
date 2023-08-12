@@ -7,10 +7,12 @@ public class FileControler : SaiMonoBehaviour
     [SerializeField] public FileFly fileFly;
     [SerializeField] public SpriteRenderer spriteRenderer;
     [SerializeField] protected FileDespawn fileDespawn;
+    [SerializeField] protected FileDamageSender fileDamageSender;
+    public FileDamageSender FileDamageSender => fileDamageSender;
     public FileDespawn FileDespawn => fileDespawn;
     protected override void LoadComponents()
     {
-        base.LoadComponents(); LoadFileFly(); LoadSpriteRenderer(); LoadDespawn();
+        base.LoadComponents(); LoadFileFly(); LoadSpriteRenderer(); LoadDespawn(); LoadFileDamageSender();
     }
     protected virtual void LoadFileFly()
     {
@@ -33,5 +35,11 @@ public class FileControler : SaiMonoBehaviour
             fileDespawn = transform.GetComponentInChildren<FileDespawn>();
         }
     }
-
+    protected virtual void LoadFileDamageSender()
+    {
+        if (fileDamageSender == null)
+        {
+            fileDamageSender = transform.GetComponentInChildren<FileDamageSender>();
+        }
+    }
 }

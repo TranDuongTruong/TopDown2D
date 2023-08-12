@@ -7,4 +7,5 @@ public class FXSpawner : Spawner
     private static FXSpawner instance;
     public static FXSpawner Instance => instance;
     public string fxName1 = "FX1";
+    public string damagePopup = "pfDamagePopup";
 }

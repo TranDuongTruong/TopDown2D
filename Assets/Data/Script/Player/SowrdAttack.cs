@@ -72,14 +72,14 @@ public class SowrdAttack : SaiMonoBehaviour
        
       //  Debug.Log("Aaaa");
     }
-
+    public float scaleOfFile=0.3f;
    public void AttackEffect(string effectName)
     {
         Vector2 pos=new Vector2((transform.parent.position.x), transform.parent.position.y);
         Transform newEffect=effectSpawner.Spawn(effectName, pos, Quaternion.identity);
         newEffect.gameObject.SetActive(true);
         FileControler fileControler=newEffect.GetComponent<FileControler>();
-
+        fileControler.FileDamageSender.damage=playerControler.PlayerStatus.damage;
         if (fileControler != null)
         {
             if (effectName == effectSpawner.effectHorizontal)
@@ -88,42 +88,48 @@ public class SowrdAttack : SaiMonoBehaviour
                 {
                     fileControler.fileFly.SetDirection(new Vector3(-1, 0, 0));
                   //  fileControler.spriteRenderer.flipX = true;
-                    fileControler.transform.localScale = new Vector3(-1, 1, 1);
+                    fileControler.transform.localScale = new Vector3(-scaleOfFile, scaleOfFile, scaleOfFile);
                 }
                 else
                 {
                     fileControler.fileFly.SetDirection(new Vector3(1, 0, 0));
                   //  fileControler.spriteRenderer.flipX = false;
-                    fileControler.transform.localScale = new Vector3(1, 1, 1);
+                    fileControler.transform.localScale = new Vector3(scaleOfFile, scaleOfFile, scaleOfFile);
                 }
             } else if(effectName== effectSpawner.effectTop)
             {
                 fileControler.fileFly.SetDirection(new Vector3(0, 1, 0));
+                fileControler.transform.localScale = new Vector3(scaleOfFile, scaleOfFile, scaleOfFile);
             }
             else if (effectName == effectSpawner.effectDown)
             {
-                fileControler.fileFly.SetDirection(new Vector3(0, -1, 0));
+                fileControler.fileFly.SetDirection(new Vector3(0, -1, 0)); 
+                fileControler.transform.localScale = new Vector3(scaleOfFile, scaleOfFile, scaleOfFile);
             } else if (effectName == effectSpawner.effectDownLeft)
             {
                 //newEffect.rotation=new Quaternion(0, 0, -135, 0);
                // newEffect.rotation = Quaternion.Euler(new Vector3(0, 0, -135));
                 fileControler.fileFly.SetDirection(new Vector3(-1, -1, 0));
+                fileControler.transform.localScale = new Vector3(scaleOfFile, scaleOfFile, scaleOfFile);
             }
             else if (effectName == effectSpawner.effectDownRight)
             {
              //   newEffect.rotation = new Quaternion(0, 0, -45, 0);
                // newEffect.rotation = Quaternion.Euler(new Vector3(0, 0, -45));
                 fileControler.fileFly.SetDirection(new Vector3(1, -1, 0));
+                fileControler.transform.localScale = new Vector3(scaleOfFile, scaleOfFile, scaleOfFile);
             }
             else if (effectName == effectSpawner.effectTopLeft)
             {
                // newEffect.rotation = Quaternion.Euler(new Vector3(0, 0, 135));
                 fileControler.fileFly.SetDirection(new Vector3(-1, 1, 0));
+                fileControler.transform.localScale = new Vector3(scaleOfFile, scaleOfFile, scaleOfFile);
             }
             else if (effectName == effectSpawner.effectTopRight)
             {
                 //newEffect.rotation = Quaternion.Euler(new Vector3(0, 0, 45));
                 fileControler.fileFly.SetDirection(new Vector3(1, 1, 0));
+                fileControler.transform.localScale = new Vector3(scaleOfFile, scaleOfFile, scaleOfFile);
             }
         }
 
