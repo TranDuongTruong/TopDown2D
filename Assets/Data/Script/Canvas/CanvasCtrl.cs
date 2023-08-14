@@ -6,6 +6,8 @@ public class CanvasCtrl : SaiMonoBehaviour
 {
    [SerializeField] PlayerControler playerControler;
     [SerializeField] Slider hpBar, powerBar,expBar;
+    [SerializeField] Text xpText, healthText;
+    
     protected override void LoadComponents()
     {
         base.LoadComponents(); LoadPlayer(); LoadSlider(); SetIntialValue();
@@ -22,9 +24,12 @@ public class CanvasCtrl : SaiMonoBehaviour
         Transform[] points = transform.GetComponentsInChildren<Transform>();
         foreach (Transform point in points)
         {
-            if (point.name == "HP") hpBar = point.GetComponent<Slider>();
-            if (point.name == "Power") powerBar = point.GetComponent<Slider>();
-            if (point.name == "ExpBar") expBar = point.GetComponent<Slider>();
+            if (point.name == "Health bar") hpBar = point.GetComponent<Slider>();
+            if (point.name == "PowerBar") powerBar = point.GetComponent<Slider>();
+            if (point.name == "XpBar") expBar = point.GetComponent<Slider>();
+            if (point.name == "XpText") xpText = point.GetComponent<Text>();
+            if (point.name == "HealthText") healthText = point.GetComponent<Text>();
+
 
         }
     }
@@ -39,6 +44,8 @@ public class CanvasCtrl : SaiMonoBehaviour
     }
     private void Update()
     {
+        xpText.text=(expBar.value+"/"+expBar.maxValue);
+        healthText.text=(hpBar.value+"/"+hpBar.maxValue);
         hpBar.value = playerControler.DamageReciver.HP;
         powerBar.value = playerControler.power;
         expBar.value = playerControler.PlayerStatus.exp;

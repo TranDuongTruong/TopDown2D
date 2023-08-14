@@ -35,7 +35,7 @@ public class GhostMovement : SaiMonoBehaviour
         
         if (ghostCtrl.distanceToPlayer <= 1.5f&& !ghostCtrl.EnemyAttack.isAttacking||  ghostCtrl.EnemyDamageReciver.takingDamage)
         {
-            Debug.Log("aaa");
+            //Debug.Log("aaa");
             ghostCtrl.EnemyModelCtrl.ChangeModel("Run");
             if (ghostCtrl.EnemyDamageReciver.takingDamage) moveSpeed = -15f;
            else moveSpeed = 1.25f;
