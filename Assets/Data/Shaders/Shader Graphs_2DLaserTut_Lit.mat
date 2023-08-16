@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 2DLaserTut_Lit
+  m_Name: Shader Graphs_2DLaserTut_Lit
   m_Shader: {fileID: -6465566751694194690, guid: 25de510e6afde8d4fa9d7221b21ab3a0, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -34,9 +34,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _LaserEdgeSmoothness: 10
-    - _LaserThickness: 106.07
+    - _LaserEdgeSmoothness: 1.4
+    - _LaserScale: 14.48
+    - _LaserThickness: -0.7
     m_Colors:
-    - _Color: {r: 1, g: 0.75374484, b: 0, a: 0}
-    - _LaserSpeed: {r: -0.2, g: 0, b: 0, a: 0}
+    - _Color: {r: 0.35371667, g: 1.452704, b: 0.047966667, a: 0}
+    - _LaserSpeed: {r: -0.4, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
