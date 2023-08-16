@@ -80,6 +80,7 @@ public class SowrdAttack : SaiMonoBehaviour
         newEffect.gameObject.SetActive(true);
         FileControler fileControler=newEffect.GetComponent<FileControler>();
         fileControler.FileDamageSender.damage=playerControler.PlayerStatus.damage;
+        fileControler.fileFly.SetSpeed(17f);
         if (fileControler != null)
         {
             if (effectName == effectSpawner.effectHorizontal)

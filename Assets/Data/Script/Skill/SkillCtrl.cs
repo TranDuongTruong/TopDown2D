@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SkillCtrl : Spawner
 {
-    [SerializeField] public float damage = 1;
-    [SerializeField] public float cooldown = 1;
+  
     [SerializeField] public int count = 1;
     [SerializeField] public int level = 1;
+
     [SerializeField] public PointSystem pointSystem;
     [SerializeField] public PlayerControler playerControler;
     [SerializeField] public Transform posForPlayer;
@@ -28,8 +28,7 @@ public class SkillCtrl : Spawner
     public bool aa=false;
     private void Update()
     {
-      //  int i=0;
-      //  Debug.Log(pointSystem.Points[level - 1].Waypoints[i].localPosition.x +"/"+ pointSystem.Points[level - 1].Waypoints[i].localPosition.y + "/" + pointSystem.Points[level - 1].Waypoints[i].localPosition.z);
+    
         if (aa)
         {
             UpgradeLevel();aa = false;
@@ -51,8 +50,7 @@ public class SkillCtrl : Spawner
             return;
         }
         RemoveSkill();
-        damage *= 2;
-        cooldown -= .2f;
+        
         count++;
         ReciveSkill(level);
         
