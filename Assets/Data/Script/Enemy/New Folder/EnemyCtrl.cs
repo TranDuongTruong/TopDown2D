@@ -16,5 +16,14 @@ public class EnemyCtrl : SaiMonoBehaviour
      public EnemyMovement EnemyMovement => enemyMovement;*/
     [SerializeField] protected ShootableObjectSO shootableObject;
     public ShootableObjectSO ShootableObject => shootableObject;
-
+    [SerializeField] public bool canMove=true;
+    public void PauseObject(float time)
+    {
+       canMove=false;
+        Invoke("ActiveOject", time);
+    }
+    public void ActiveOject()
+    {
+        canMove = true;
+    }
 }

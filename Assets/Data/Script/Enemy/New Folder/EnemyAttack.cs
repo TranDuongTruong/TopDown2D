@@ -17,6 +17,7 @@ public class EnemyAttack : SaiMonoBehaviour
     }
     private void Update()
     {
+        if (!ghostCtrl.canMove) return;
         UpdateTarget();
         if (isAttacking && !ghostCtrl.EnemyDamageReciver.takingDamage)
         {

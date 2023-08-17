@@ -23,8 +23,9 @@ public class FileDamageSender : SaiMonoBehaviour
     private void Update()
     {
         if (enemyCtrl == null) return;
-        enemyCtrl.EnemyDamageReciver.TakeDamage(damage) ;
-        
+      //  enemyCtrl.EnemyDamageReciver.TakeDamage(damage) ;
+        fileControler.EffectOfFile.CreateFileEffect(enemyCtrl,damage);
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -50,9 +51,11 @@ public class FileDamageSender : SaiMonoBehaviour
         pfDamagePopup pfDamage=pfDamagepp.GetComponent<pfDamagePopup>();
 
         if (pfDamage != null) pfDamage.SetValue((int)damage);
-        Transform newFX = fxSpawner.Spawn("FX1", collision.transform.position, Quaternion.identity);
 
-        newFX.gameObject.SetActive(true);
+        
+       /* Transform newFX = fxSpawner.Spawn("FX1", collision.transform.position, Quaternion.identity);
+
+        newFX.gameObject.SetActive(true);*/
     }
 
     private void OnTriggerExit2D(Collider2D collision)

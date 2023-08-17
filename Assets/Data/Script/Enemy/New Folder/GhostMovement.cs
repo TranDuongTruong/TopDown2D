@@ -29,9 +29,8 @@ public class GhostMovement : SaiMonoBehaviour
     }
     private void Update()
     {
-       
 
-  
+        if (!ghostCtrl.canMove) return;  
         
         if (ghostCtrl.distanceToPlayer <= 1.5f&& !ghostCtrl.EnemyAttack.isAttacking||  ghostCtrl.EnemyDamageReciver.takingDamage)
         {

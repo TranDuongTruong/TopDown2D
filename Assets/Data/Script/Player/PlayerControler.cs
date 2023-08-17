@@ -53,11 +53,17 @@ public class PlayerControler : SaiMonoBehaviour
     }
     private void FixedUpdate()
     {
+        Running();
         if (damageReciver.takeDamage)
         {
             animator.Play("Player_TakeDamage");
-        } 
-        if(movementInput!= Vector2.zero)
+        }
+        else
+        {
+            // Smoothly move the player based on movementInput
+            rb.velocity = movementInput * moveSpeed;
+        }
+        if (movementInput!= Vector2.zero)
         {
             bool success=TryMove(movementInput);
             if (!success)
@@ -184,7 +190,15 @@ public class PlayerControler : SaiMonoBehaviour
              moveSpeed = 1f;
          }*/
     }
-    private void Update()
+    
+    
+    
+    /*private void Update()
+    {
+        Running();
+    }*/
+
+    private void Running()
     {
         if (!isRunning)
         {
@@ -201,6 +215,7 @@ public class PlayerControler : SaiMonoBehaviour
         }
         else moveSpeed = playerStatus.speed;
     }
+
     public void SwordAttack()
     {
        

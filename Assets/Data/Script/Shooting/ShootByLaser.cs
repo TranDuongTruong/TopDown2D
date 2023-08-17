@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShootByLaser : SaiMonoBehaviour
 {
     
-    [SerializeField] float damage = 3f;
+    [SerializeField] public float damage = 3f;
     [SerializeField] float speed = 45;
     [SerializeField] float time = 0;
     [SerializeField] float useTime = 3;

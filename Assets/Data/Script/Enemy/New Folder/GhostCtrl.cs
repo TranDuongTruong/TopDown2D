@@ -12,6 +12,7 @@ public class GhostCtrl : EnemyCtrl
 
 
 
+   
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -20,6 +21,10 @@ public class GhostCtrl : EnemyCtrl
     }
     private void Update()
     {
+        if (!canMove)
+        {         
+            return;
+        }
         distanceToPlayer = Vector2.Distance(transform.position, playerControler.transform.position);
     }
     protected virtual void LoadPlayer()

@@ -18,13 +18,46 @@ public class SwordEffectSpawner : Spawner
     public Quaternion rotDownLeft;
     public string effectTop="FileTop";
     public string effectDown="FileDown";
-
-
+    [SerializeField] protected TypeOfFile  typeOfFile;
+    [SerializeField] public SpriteRenderer sprite = new SpriteRenderer();
+    protected override void LoadComponents()
+    {
+        base.LoadComponents(); LoadTypeOfEffect();
+    }
+    protected virtual void LoadTypeOfEffect()
+    {
+        if (typeOfFile == null)
+        {
+            typeOfFile = transform.GetComponentInChildren<TypeOfFile>();
+        }
+    }
     protected override void Awake()
     {
         base.Awake();
         if (SwordEffectSpawner.instance != null) Debug.LogError("Only 1 BulletSpawner allow to exist");
         SwordEffectSpawner.instance = this;
+        SetTypeOfEffect("Ice");
+
+    }
+    public void SetTypeOfEffect(string name)
+    {
+        
+        foreach (SpriteRenderer sprite1 in typeOfFile.TypeOfFiles)
+        {
+            if (sprite1.name == name) sprite = sprite1;
+        }
+        if (sprite != null)
+        {
+            foreach(Transform prefab in prefabs)
+            {
+                FileControler fileControler= prefab.GetComponent<FileControler>();
+                if(fileControler != null)
+                {
+                    fileControler.spriteRenderer.sprite = sprite.sprite;
+                    Debug.Log(sprite.name);
+                }
+            }
+        }
     }
 }
 
