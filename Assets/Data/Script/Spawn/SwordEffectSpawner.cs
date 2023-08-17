@@ -36,7 +36,7 @@ public class SwordEffectSpawner : Spawner
         base.Awake();
         if (SwordEffectSpawner.instance != null) Debug.LogError("Only 1 BulletSpawner allow to exist");
         SwordEffectSpawner.instance = this;
-        SetTypeOfEffect("Ice");
+        SetTypeOfEffect("Normal");
 
     }
     public void SetTypeOfEffect(string name)
@@ -57,6 +57,7 @@ public class SwordEffectSpawner : Spawner
                     Debug.Log(sprite.name);
                 }
             }
+            poolObjs.Clear();
         }
     }
 }

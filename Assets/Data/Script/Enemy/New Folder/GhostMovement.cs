@@ -36,7 +36,7 @@ public class GhostMovement : SaiMonoBehaviour
         {
             //Debug.Log("aaa");
             ghostCtrl.EnemyModelCtrl.ChangeModel("Run");
-            if (ghostCtrl.EnemyDamageReciver.takingDamage) moveSpeed = -15f;
+            if (ghostCtrl.EnemyDamageReciver.takingDamage) moveSpeed = -2f;
            else moveSpeed = 1.25f;
 
             ChasePlayer();

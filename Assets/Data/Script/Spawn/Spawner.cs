@@ -6,6 +6,7 @@ public abstract class Spawner : SaiMonoBehaviour
 {
     [Header("Spawner")]
     [SerializeField] protected Transform holder;
+ 
 
     [SerializeField] protected int spawnedCount = 0;
     public int SpawnedCount => spawnedCount;
@@ -118,4 +119,5 @@ public abstract class Spawner : SaiMonoBehaviour
     {
         obj.parent = this.holder;
     }
+   
 }
