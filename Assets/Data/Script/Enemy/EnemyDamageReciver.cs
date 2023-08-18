@@ -31,7 +31,7 @@ public class EnemyDamageReciver : DamageReceiver
     }
     protected virtual void OnDeadDrop()
     {
-        if(transform==null) return; 
+        if(transform==null||this.enemy==null) return; 
         Vector3 dropPos = transform.position;
         Quaternion dropRot = transform.rotation;
         

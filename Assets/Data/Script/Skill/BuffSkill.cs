@@ -26,11 +26,14 @@ public class BuffSkill : SaiMonoBehaviour
         
         if (skillCtrl.isActive)
         {
-
-            if (skillCtrl.level >= skillCtrl.levelMax) return;
-            skillCtrl.level++;
-            skillCtrl. isActive = false;
-            skillCtrl.playerControler.sowrdAttack.effectSpawner.SetTypeOfEffect(effectName);
+            
+                if (skillCtrl.level >= skillCtrl.levelMax) return;
+                skillCtrl.level++;
+                skillCtrl.isActive = false;
+                skillCtrl.playerControler.sowrdAttack.effectSpawner.SetTypeOfEffect(effectName);
+            
+           
+            
         }
        
     }

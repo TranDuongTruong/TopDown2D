@@ -8,7 +8,7 @@ public class CanvasCtrl : SaiMonoBehaviour
     [SerializeField] Slider hpBar, powerBar,expBar;
     [SerializeField] Text xpText, healthText;
     [SerializeField] SkillRandomUI skillRandomUI;
-    
+
     protected override void LoadComponents()
     {
         base.LoadComponents(); LoadPlayer(); LoadSlider(); SetIntialValue();
@@ -43,16 +43,30 @@ public class CanvasCtrl : SaiMonoBehaviour
         powerBar.maxValue = playerControler.PlayerStatus.maxPower;
         powerBar.value = playerControler.PlayerStatus.maxPower;
     }
-    public bool aa=false;
+    public bool activeRandomSkills=false;
+    public bool randomSkillsAgain=false;
     private void Update()
     {
-        if (aa) {
+        if (Input.GetKeyDown(KeyCode.Tab) && !skillRandomUI.gameObject.activeSelf)
+        { 
+            activeRandomSkills = true;
+        
+        }
+
+
+        if (activeRandomSkills) {
            
             skillRandomUI.gameObject.SetActive(true);
             skillRandomUI.chose = true;
-            aa = false; 
-            
+            activeRandomSkills = false;  Time.timeScale = 0;
+            activeRandomSkills=false ;
+
+
         }
+       
+
+
+
         expBar.value = playerControler.PlayerStatus.exp;
        
         hpBar.value = playerControler.DamageReciver.HP;

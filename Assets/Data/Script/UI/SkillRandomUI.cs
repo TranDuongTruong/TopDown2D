@@ -11,14 +11,18 @@ public class SkillRandomUI : SaiMonoBehaviour
     [SerializeField] public PlayerControler playerControler;
     [SerializeField] public SkillsSystemManager skillsSystem;
     [SerializeField] public List<SkillUICtrl> skillUICtrlList;
+    
     [SerializeField] public TextMeshProUGUI skillPoint;
     [SerializeField] public List<SkillCtrl> sellectedSkills;
     [SerializeField] public Button closeButton;
+    [SerializeField] public Button againButton;
     [SerializeField] public bool chose=false;
+[SerializeField] public List<SkillBoxUICtrl> skillBoxUICtrls;
+    [SerializeField] public int currentSkillBox = 0;
 
     protected override void LoadComponents()
     {
-        base.LoadComponents(); LoadPlayer(); LoadSkillSystem(); LoadSkillUIList(); LoadSkillPoint(); LoadCloseButton();
+        base.LoadComponents(); LoadPlayer(); LoadSkillSystem(); LoadSkillUIList(); LoadSkillPoint(); LoadCloseAndAgainButton(); LoadSkillBoxUI();
     }
 
     protected virtual void LoadPlayer()
@@ -46,6 +50,15 @@ public class SkillRandomUI : SaiMonoBehaviour
             skillUICtrlList.Add(skillUICtrl);
         }
     }
+    protected virtual void LoadSkillBoxUI()
+    {
+        if (skillBoxUICtrls.Count > 0) return;
+        SkillBoxUICtrl[] skillUICtrls = transform.parent.GetComponentsInChildren<SkillBoxUICtrl>();
+        foreach (SkillBoxUICtrl skillUICtrl in skillUICtrls)
+        {
+            skillBoxUICtrls.Add(skillUICtrl);
+        }
+    }
     protected virtual void LoadSkillPoint()
     {
         TextMeshProUGUI[] contents = transform.GetComponentsInChildren<TextMeshProUGUI>();
@@ -55,19 +68,21 @@ public class SkillRandomUI : SaiMonoBehaviour
             break;
         }
     }
-    protected virtual void LoadCloseButton()
+    protected virtual void LoadCloseAndAgainButton()
     {
         Button[] contents = transform.GetComponentsInChildren<Button>();
         foreach (Button content in contents)
         {
             if (content.name == "CloseButton") this.closeButton = content;
-            break;
+            if (content.name == "RandomAgain") this.againButton = content;
+            
         }
     }
+    
     private void Update()
     {
 
-        closeButton.onClick.AddListener(CloseObj);
+        
         skillPoint.text=playerControler.PlayerStatus.skillPoint.ToString();
         if (chose)
         {
@@ -76,26 +91,45 @@ public class SkillRandomUI : SaiMonoBehaviour
             {
                 skillUICtrlList[i].SetBGAndContent(sellectedSkills[i].content.text, sellectedSkills[i].avatar);
             }
-            chose = false;  
+            chose = false;
            
         }
+      
+        
+        
+    }
+    protected override void Awake()
+    {
+        base.Awake();
+        closeButton.onClick.AddListener(CloseObj);
+        againButton.onClick.AddListener(RanndomSkillsAgain);
         skillUICtrlList[0].button.onClick.AddListener(() => ChoosingSkill(0));
         skillUICtrlList[1].button.onClick.AddListener(() => ChoosingSkill(1));
         skillUICtrlList[2].button.onClick.AddListener(() => ChoosingSkill(2));
-        
-        
     }
     protected virtual void ChoosingSkill(int i)
     {
-        if (playerControler.PlayerStatus.skillPoint == 0) return;
-        playerControler.PlayerStatus.skillPoint--;
-        skillsSystem.SelectSkill(sellectedSkills[i].name);
-        chose = true;
+        
+        {
+            if (playerControler.PlayerStatus.skillPoint == 0) return;
+           
+            playerControler.PlayerStatus.skillPoint -= 1;
+            skillsSystem.SelectSkill(sellectedSkills[i].name);
+            skillBoxUICtrls[currentSkillBox].SetSkill(sellectedSkills[i].avatar);
+            currentSkillBox++;
+            chose = true;
+        }
     }
     protected virtual void CloseObj()
     {
+        Time.timeScale = 1;
         chose=false;
         transform.gameObject.SetActive(false);
+    }
+    protected virtual void RanndomSkillsAgain()
+    {
+        chose = true;
+
     }
 
 }
