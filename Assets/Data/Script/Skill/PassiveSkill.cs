@@ -6,7 +6,7 @@ public class PassiveSkill : Spawner
 {
   
     [SerializeField] public int count = 1;
-    [SerializeField] public int level = 1;
+
 
     [SerializeField] public SkillCtrl skillCtrl;
     [SerializeField] public PointSystem pointSystem;
@@ -34,6 +34,7 @@ public class PassiveSkill : Spawner
     
         if (skillCtrl.isActive)
         {
+            if (skillCtrl.level >= skillCtrl.levelMax) return;
             UpgradeLevel(); skillCtrl.isActive = false;
         }
         posForPlayer.localPosition = new Vector3(0, 0, 0);
@@ -46,22 +47,22 @@ public class PassiveSkill : Spawner
    public void UpgradeLevel()
     {
         
-        if (skillCtrl.level == 1)
+        if (skillCtrl.level == 0)
         {
-            ReciveSkill(skillCtrl.level);
+            ReciveSkill(skillCtrl.level+1);
            
             return;
         }
         RemoveSkill();
         
         count++;
-        ReciveSkill(skillCtrl.level);
+        ReciveSkill(skillCtrl.level+1);
         
     }
     public void ReciveSkill(int level)
     {
-         
-        for(int i = 0; i < count; i++)
+        
+        for (int i = 0; i < count; i++)
         {
             Transform newSkill = Spawn(prefabs[level - 1], pointSystem.Points[level - 1].Waypoints[i].position,Quaternion.identity);
             newSkill.gameObject.SetActive(true);

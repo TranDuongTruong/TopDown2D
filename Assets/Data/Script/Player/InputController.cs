@@ -32,6 +32,6 @@ public class InputController : MonoBehaviour
     private void OnFire()
     {
         // X? lý s? ki?n khi nh?n chu?t
-        Debug.Log("Fire!");
+        
     }
 }

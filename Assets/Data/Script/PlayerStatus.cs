@@ -14,6 +14,7 @@ public class PlayerStatus : SaiMonoBehaviour
     [SerializeField] public float maxExp=50;   
     [SerializeField] public float level=0;
     [SerializeField] public float maxPower=100;
+    [SerializeField] public float skillPoint=0;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -31,14 +32,18 @@ public class PlayerStatus : SaiMonoBehaviour
     }
     public void UpgradeLevel()
     {
-        if (exp >= maxExp)
+       if (exp >= maxExp)
         {
             level++;
-            exp = 0;
+
+            exp -=maxExp;
+
             maxExp *= 2;
+
             damage *= damage / 3; 
             hp += maxHp / 2;
             maxHp += maxHp / 2;
+            skillPoint++;
            
         }
     }

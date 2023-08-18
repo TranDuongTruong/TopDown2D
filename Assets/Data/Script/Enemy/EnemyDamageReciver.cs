@@ -31,8 +31,10 @@ public class EnemyDamageReciver : DamageReceiver
     }
     protected virtual void OnDeadDrop()
     {
+        if(transform==null) return; 
         Vector3 dropPos = transform.position;
         Quaternion dropRot = transform.rotation;
+        
         ItemDropSpawner.Instance.Drop(this.enemy.ShootableObject.dropList, dropPos, dropRot);
     }
 
