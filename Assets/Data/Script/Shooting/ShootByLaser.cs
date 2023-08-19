@@ -28,46 +28,7 @@ public class ShootByLaser : SaiMonoBehaviour
         }
     }
     public int direction = 1;
-    /* private void Update()
-     {
-         if (cooling)
-         {
-             delay -= Time.deltaTime;
-             if (delay <= 0f)
-             {
-                 cooling = false; // K?t thúc cooldown
-             }
-         }
-         else
-         {
-
-             time += Time.deltaTime;
-
-             if (time < useTime)
-             {
-                 foreach (LineRenderer line in lines)
-                 {
-                     line.gameObject.SetActive(true);
-                     line.transform.rotation *= Quaternion.Euler(0f, 0f, speed * Time.deltaTime* direction); 
-                 }
-             }
-             else
-             {
-                 time = 0f;
-                 cooling = true; // B?t ??u cooldown
-                 delay = 2f;
-                 direction = Random.Range(0, 2) * 2 - 1;
-                 foreach (LineRenderer line in lines)
-                 {
-                     line.gameObject.SetActive(false);
-                     line.transform.rotation = new Quaternion(0, 0, 90, 0);
-
-                 }
-
-             }
-         }
-
-     }*/
+    
     private void Update()
     {
         if (cooling)

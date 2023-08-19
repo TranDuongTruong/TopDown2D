@@ -16,5 +16,7 @@ MonoBehaviour:
   objType: 2
   hpMax: 20
   dropList:
-  - itemSO: {fileID: 11400000, guid: dcd51a54725d7a047872990ae1cf2af6, type: 2}
-    dropRate: 100000
+  - itemSO: {fileID: 11400000, guid: 5ffd4e66f361b1a42bda37318b896d50, type: 2}
+    dropRate: 70000
+  - itemSO: {fileID: 11400000, guid: 1ac4fdc21db86054db61e383098652d3, type: 2}
+    dropRate: 5000

@@ -8,6 +8,8 @@ public enum ItemCode
     IronOre = 1,
     GoldOre = 2,
     Sword= 3,
+    SmallExp=4,
+    BigExp=5,
 }
 
 public class ItemCodeParser{
