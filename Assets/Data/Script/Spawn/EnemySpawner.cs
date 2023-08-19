@@ -30,7 +30,7 @@ public class EnemySpawner : Spawner
     protected override void Start()
     {
         base.Start();
-        SpawnEnemy("BlackGhost", countOfEnemies); //InitializeAvailableSpawnIndices();
+        SpawnEnemy("Beetle", countOfEnemies); //InitializeAvailableSpawnIndices();
     }
     private void InitializeAvailableSpawnIndices()
     {

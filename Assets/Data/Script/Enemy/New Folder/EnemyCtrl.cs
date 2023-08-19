@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyCtrl : SaiMonoBehaviour
 {
+    [SerializeField] protected PlayerControler playerControler;
+    public PlayerControler PlayerControler => playerControler;
+
     [SerializeField] protected EnemyModelCtrl enemyModelCtrl;
     public EnemyModelCtrl EnemyModelCtrl => enemyModelCtrl;
 
@@ -17,6 +20,8 @@ public class EnemyCtrl : SaiMonoBehaviour
     [SerializeField] protected ShootableObjectSO shootableObject;
     public ShootableObjectSO ShootableObject => shootableObject;
     [SerializeField] public bool canMove=true;
+    [SerializeField] protected float distanceToPlayer = 0;
+    public float DistanceToPlayer => distanceToPlayer;  
     public void PauseObject(float time)
     {
        canMove=false;
@@ -25,5 +30,37 @@ public class EnemyCtrl : SaiMonoBehaviour
     public void ActiveOject()
     {
         canMove = true;
+    }
+    protected override void LoadComponents()
+    {
+        base.LoadComponents(); LoadDamageReciver(); LoadModelCtrl(); LoadEnemyAttack(); LoadPlayer();
+    }
+    protected virtual void LoadDamageReciver()
+    {
+        if (enemyDamageReciver == null)
+        {
+            enemyDamageReciver = transform.GetComponentInChildren<EnemyDamageReciver>();
+        }
+    }
+    protected virtual void LoadModelCtrl()
+    {
+        if (enemyModelCtrl == null)
+        {
+            enemyModelCtrl = transform.GetComponentInChildren<EnemyModelCtrl>();
+        }
+    }
+    protected virtual void LoadEnemyAttack()
+    {
+        if (enemyAttack == null)
+        {
+            enemyAttack = transform.GetComponentInChildren<EnemyAttack>();
+        }
+    }
+    protected virtual void LoadPlayer()
+    {
+        if (playerControler == null)
+        {
+            playerControler = Transform.FindObjectOfType<PlayerControler>();
+        }
     }
 }

@@ -5,24 +5,24 @@ using UnityEngine;
 public class EnemyAttack : SaiMonoBehaviour
 {
     
-    [SerializeField] GhostCtrl ghostCtrl;
+    [SerializeField] EnemyCtrl enemyCtrl;
 
     public bool isAttacking = false;
     public float  range = 1;
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        ghostCtrl = transform.parent.GetComponent<GhostCtrl>();
+        enemyCtrl = transform.parent.GetComponent<EnemyCtrl>();
         
     }
     private void Update()
     {
-        if (!ghostCtrl.canMove) return;
+        if (!enemyCtrl.canMove) return;
         UpdateTarget();
-        if (isAttacking && !ghostCtrl.EnemyDamageReciver.takingDamage)
+        if (isAttacking && !enemyCtrl.EnemyDamageReciver.takingDamage)
         {
            
-            ghostCtrl.EnemyModelCtrl.ChangeModel("Attack");
+            enemyCtrl.EnemyModelCtrl.ChangeModel("Attack");
         }
     }
     void UpdateTarget()
@@ -32,7 +32,7 @@ public class EnemyAttack : SaiMonoBehaviour
     
 
              
-            if (ghostCtrl.distanceToPlayer < range)
+            if (enemyCtrl.DistanceToPlayer < range)
             {
                 isAttacking=true;
                 

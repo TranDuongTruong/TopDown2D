@@ -5,12 +5,13 @@ using UnityEngine;
 public class EnemyModelCtrl : SaiMonoBehaviour
 {
     [SerializeField] public List<GameObject> models;
-    [SerializeField] public GhostCtrl ghostCtrl;
+    [SerializeField] public GameObject currentModels;
+    [SerializeField] public EnemyCtrl enemyCtrl;
     protected override void LoadComponents()
     {
         base.LoadComponents();
         LoadModels();
-        ghostCtrl = transform.parent.GetComponent<GhostCtrl>();
+        enemyCtrl = transform.parent.GetComponent<EnemyCtrl>();
     }
     public void LoadModels()
     {
@@ -19,9 +20,10 @@ public class EnemyModelCtrl : SaiMonoBehaviour
 
         foreach (Transform t in points)
         {
-            if(t==this.transform) continue;
+            if(t==this.transform|| t.name == "DamageSender") continue;
             models.Add(t.gameObject);
             t.gameObject.SetActive(false);
+            
         }
         models[0].SetActive(true);
     }
@@ -32,7 +34,12 @@ public class EnemyModelCtrl : SaiMonoBehaviour
             if (model.name.Equals(nameOfModel))
             {
                 model.SetActive(true);
+                currentModels=model;
             } else model.SetActive(false);
         }
+    }
+    private void Update()
+    {
+       // currentModels.transform.LookAt(enemyCtrl.PlayerControler.transform);
     }
 }
