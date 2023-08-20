@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerStatus : SaiMonoBehaviour
 {
     [SerializeField] public PlayerControler playerControler;
+    [SerializeField] public CanvasCtrl canvasCtrl;
     [SerializeField] public float hp=100;
     [SerializeField] public float speed=5;
     [SerializeField] public float maxHp=100;
@@ -25,6 +26,7 @@ public class PlayerStatus : SaiMonoBehaviour
     {
         if (playerControler != null) return;
         playerControler = transform.parent.GetComponent<PlayerControler>();
+        canvasCtrl=Transform.FindObjectOfType<CanvasCtrl>();
     }
     private void Update()
     {
@@ -44,7 +46,7 @@ public class PlayerStatus : SaiMonoBehaviour
             hp += maxHp / 2;
             maxHp += maxHp / 2;
             skillPoint++;
-           
+            canvasCtrl.activeRandomSkills = true;
         }
     }
     public void GetAbility(ItemStatus itemStatus)
