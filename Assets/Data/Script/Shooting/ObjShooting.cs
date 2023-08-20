@@ -10,6 +10,7 @@ public class ObjShooting : SaiMonoBehaviour
     [SerializeField] float speed = 30;
     [SerializeField] float time = 0;
     [SerializeField] float delay = 1;
+    [SerializeField] float numOfBullet = 1;
     [SerializeField] string bulletName = "Spirit";
 
 
@@ -55,6 +56,7 @@ public class ObjShooting : SaiMonoBehaviour
             {
                  if (enemy != null)
                     {
+                    for(int i=0;i<numOfBullet;i++)
                          Shooting(enemy,damage,speed);
                     break;
                     }

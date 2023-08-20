@@ -55,8 +55,11 @@ public class BulletDamageSender : SaiMonoBehaviour
         pfDamagePopup pfDamage = pfDamagepp.GetComponent<pfDamagePopup>();
 
         if (pfDamage != null) pfDamage.SetValue((int)damage);
-        //Transform newFX = fxSpawner.Spawn("FX1", collision.transform.position, Quaternion.identity);
-      //  newFX.gameObject.SetActive(true);
+        if (bulletCtrl.typeOfBullet == "Rocket")
+        {
+            Transform exploslion = fxSpawner.Spawn("ExplosionEffect", collision.transform.position, Quaternion.identity);
+            exploslion.gameObject.SetActive(true);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

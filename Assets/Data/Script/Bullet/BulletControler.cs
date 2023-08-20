@@ -10,6 +10,7 @@ public class BulletControler : SaiMonoBehaviour
     [SerializeField] protected BulletDamageSender damageSender;
     public BulletDamageSender BulletDamageSender => damageSender;
     public BulletDespawn Despawn => despawn;
+    public string typeOfBullet = "Bullet";
     protected override void LoadComponents()
     {
         base.LoadComponents(); LoadFileFly();  LoadDespawn(); LoadFileDamageSender();
