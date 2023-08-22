@@ -7,13 +7,13 @@ public class EnemySpawner : Spawner
     [SerializeField] public PointCtrl pointCtrl;
     [SerializeField] public PlayerControler playerControler;
     [SerializeField]   public float timeLimit=5f;
-    
+    [SerializeField] List<Transform> points;
     [SerializeField] public int countOfEnemies = 5;
     private List<int> availableSpawnIndices = new List<int>();
 
     protected override void LoadComponents()
     {
-        base.LoadComponents(); LoadPlayer(); LoadPoints(); InitializeAvailableSpawnIndices();
+        base.LoadComponents(); LoadPlayer(); LoadPoints();// InitializeAvailableSpawnIndices();
     }
     protected virtual void LoadPlayer()
     {
@@ -30,12 +30,12 @@ public class EnemySpawner : Spawner
     protected override void Start()
     {
         base.Start();
-        SpawnEnemy("Beetle", countOfEnemies); //InitializeAvailableSpawnIndices();
+       // SpawnEnemy("Beetle", countOfEnemies); //InitializeAvailableSpawnIndices();
     }
-    private void InitializeAvailableSpawnIndices()
+    private void InitializeAvailableSpawnIndices(List<Transform> points)
     {
         availableSpawnIndices.Clear();
-        for (int i = 0; i < pointCtrl.Waypoints.Count; i++)
+        for (int i = 0; i < points.Count; i++)
         {
             availableSpawnIndices.Add(i);
         }
@@ -54,7 +54,7 @@ public class EnemySpawner : Spawner
     {
         if (availableSpawnIndices.Count == 0)
         {
-            InitializeAvailableSpawnIndices();
+            InitializeAvailableSpawnIndices(pointCtrl.Waypoints);
         }
 
         for (int i = 0; i < count; i++)
@@ -77,5 +77,31 @@ public class EnemySpawner : Spawner
             availableSpawnIndices.RemoveAt(randomIndex); // ?ánh d?u v? trí này ?ã ???c s? d?ng
         }
     }
-  
+    public void SpawnEnemy(string name, int count, List<Transform> points)
+    {
+        if (availableSpawnIndices.Count == 0)
+        {
+            InitializeAvailableSpawnIndices(points);
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            if (availableSpawnIndices.Count == 0)
+            {
+                break; // Không còn v? trí spawn kh? d?ng, d?ng vòng l?p
+            }
+
+            int randomIndex = Random.Range(0, availableSpawnIndices.Count);
+            int spawnIndex = availableSpawnIndices[randomIndex];
+
+            Transform spawnPoint = points[spawnIndex];
+
+            // Spawn enemy at the chosen spawn point
+            Transform newEnemy = Spawn(name, spawnPoint.position, Quaternion.identity);
+            newEnemy.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            newEnemy.gameObject.SetActive(true);
+
+            availableSpawnIndices.RemoveAt(randomIndex); // ?ánh d?u v? trí này ?ã ???c s? d?ng
+        }
+    }
 }
