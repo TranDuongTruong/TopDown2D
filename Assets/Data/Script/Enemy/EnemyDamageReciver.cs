@@ -26,8 +26,8 @@ public class EnemyDamageReciver : DamageReceiver
     {
         //  enemy.animator.SetBool("isDead", true);
         OnDeadDrop();
-        Destroy(transform.parent.gameObject);
-
+      //  Destroy(transform.parent.gameObject);
+      enemy.EnemyDespawn.DespawnObject();
     }
     protected virtual void OnDeadDrop()
     {

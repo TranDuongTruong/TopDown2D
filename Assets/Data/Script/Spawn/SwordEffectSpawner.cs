@@ -54,7 +54,7 @@ public class SwordEffectSpawner : Spawner
                 if(fileControler != null)
                 {
                     fileControler.spriteRenderer.sprite = sprite.sprite;
-                    Debug.Log(sprite.name);
+                   // Debug.Log(sprite.name);
                 }
             }
             poolObjs.Clear();

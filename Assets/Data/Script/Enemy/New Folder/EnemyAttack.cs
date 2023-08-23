@@ -19,18 +19,24 @@ public class EnemyAttack : SaiMonoBehaviour
     {
         if (!enemyCtrl.canMove) return;
         UpdateTarget();
+        if (enemyCtrl.normalEnemy) Attacking();
+       // else BossAttacking();
+    }
+    private void BossAttacking()
+    {
+
+    }
+    private void Attacking()
+    {
         if (isAttacking && !enemyCtrl.EnemyDamageReciver.takingDamage)
         {
-           
+
             enemyCtrl.EnemyModelCtrl.ChangeModel("Attack");
         }
     }
+
     void UpdateTarget()
     {
-       
-       
-    
-
              
             if (enemyCtrl.DistanceToPlayer < range)
             {

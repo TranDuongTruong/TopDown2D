@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySpawner : Spawner
 {
+    private static EnemySpawner instance;
+    public static EnemySpawner Instance => instance;
     [SerializeField] public PointCtrl pointCtrl;
     [SerializeField] public PlayerControler playerControler;
     [SerializeField]   public float timeLimit=5f;
@@ -14,6 +16,11 @@ public class EnemySpawner : Spawner
     protected override void LoadComponents()
     {
         base.LoadComponents(); LoadPlayer(); LoadPoints();// InitializeAvailableSpawnIndices();
+    }
+    protected override void Awake()
+    {
+        base.Awake();
+        instance = this;
     }
     protected virtual void LoadPlayer()
     {
