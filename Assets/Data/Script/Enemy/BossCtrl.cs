@@ -28,6 +28,7 @@ public class BossCtrl : EnemyCtrl
     public float time = 0;
     public bool canAttack=true;
     public bool canAttackFinalSkill=true;
+    public bool startAttack=false;
     private void Update()
     {
         distanceToPlayer = Vector2.Distance(transform.position, playerControler.transform.position);
@@ -42,7 +43,7 @@ public class BossCtrl : EnemyCtrl
         }else 
         if (enemyAttack.isAttacking&& canAttack)
         {
-
+            startAttack = true;
             canMove = false;
 
             bossModelCtrl.SetAttack1();

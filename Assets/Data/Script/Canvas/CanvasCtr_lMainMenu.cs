@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class CanvasCtr_lMainMenu : SaiMonoBehaviour
@@ -22,7 +23,7 @@ public class CanvasCtr_lMainMenu : SaiMonoBehaviour
     }
     protected void PlayGame()
     {
-        Debug.Log("aaa");
+        SceneManager.LoadScene("Main");
     }
     protected void Setting()
     {

@@ -9,6 +9,7 @@ TagManager:
   - PlayerDamageReciver
   - EnemyDamageReciver
   - Obstacle
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -17,14 +18,14 @@ TagManager:
   - Water
   - UI
   - Ground
-  - Sword
+  - 
   - Minimap
   - Level
   - SpotLight
   - Player
-  - 
-  - 
-  - 
+  - Enemy
+  - Sword
+  - Effect
   - 
   - 
   - 

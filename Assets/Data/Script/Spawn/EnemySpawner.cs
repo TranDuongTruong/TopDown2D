@@ -100,9 +100,9 @@ public class EnemySpawner : Spawner
 
             int randomIndex = Random.Range(0, availableSpawnIndices.Count);
             int spawnIndex = availableSpawnIndices[randomIndex];
-
+            if (spawnIndex < 0 || spawnIndex >= points.Count) return;
             Transform spawnPoint = points[spawnIndex];
-
+            
             // Spawn enemy at the chosen spawn point
             Transform newEnemy = Spawn(name, spawnPoint.position, Quaternion.identity);
             newEnemy.localScale = new Vector3(0.5f, 0.5f, 0.5f);

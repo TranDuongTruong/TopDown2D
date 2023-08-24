@@ -215,7 +215,7 @@ public class PlayerControler : SaiMonoBehaviour
         }
         else moveSpeed = playerStatus.speed;
     }
-
+ 
     public void SwordAttack()
     {
        

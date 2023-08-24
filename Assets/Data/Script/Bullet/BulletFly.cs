@@ -45,7 +45,7 @@ public class BulletFly : SaiMonoBehaviour
         {
             bulletCtrl.Despawn.DespawnObject();
             return;
-        }
+        }else
         transform.parent.position = Vector2.MoveTowards(transform.parent.position, target.transform.position, Time.deltaTime * flySpeed);
     }
     private void RocketFlying()
@@ -56,11 +56,7 @@ public class BulletFly : SaiMonoBehaviour
         {
             bulletCtrl.Despawn.DespawnObject();
             return;
-        }
-       // transform.parent.position = Vector2.MoveTowards(transform.parent.position, target.transform.position, Time.deltaTime * flySpeed);
- 
-
-       if (target != null)
+        }else    
         {
             Vector3 direction = target.position - transform.parent.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
