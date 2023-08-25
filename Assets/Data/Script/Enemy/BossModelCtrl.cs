@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BossModelCtrl : SaiMonoBehaviour
 {
-  [SerializeField] public Animator animator;
+    [SerializeField] protected List<string> enemyNames ;
+    [SerializeField] public Animator animator;
     [SerializeField] BossCtrl enemyCtrl;
     protected override void LoadComponents()
     {
@@ -57,13 +58,18 @@ public class BossModelCtrl : SaiMonoBehaviour
     }
     public void ActiveSkill01()
     {
-        enemyCtrl.EnemySpawner.SpawnEnemy("BlueGhost", 10);
+        SpawnEnemy(5);
     }
     public void ActiveSkill02()
     {
-        enemyCtrl.EnemySpawner.SpawnEnemy("BlueGhost", 5);
-        enemyCtrl.EnemySpawner.SpawnEnemy("BlackGhost",5);
-        enemyCtrl.EnemySpawner.SpawnEnemy("Giant", 10);
-        enemyCtrl.EnemySpawner.SpawnEnemy("Beetle", 10);
+        SpawnEnemy(10);
+    }
+    private void SpawnEnemy(int spawnCount)
+    {
+        for (int i = 0; i < spawnCount; i++)
+        {      
+            string randomEnemyName = enemyNames[Random.Range(0, enemyNames.Count)];
+            enemyCtrl.EnemySpawner.SpawnEnemy(randomEnemyName, i);
+        }
     }
 }

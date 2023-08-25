@@ -115,9 +115,23 @@ public class SkillRandomUI : SaiMonoBehaviour
            
             playerControler.PlayerStatus.skillPoint -= 1;
             skillsSystem.SelectSkill(sellectedSkills[i].name);
-            skillBoxUICtrls[currentSkillBox].SetSkill(sellectedSkills[i].avatar);
-            currentSkillBox++;
-            chose = true;
+            bool isExist = false;
+
+            foreach(SkillBoxUICtrl skillBox in skillBoxUICtrls)
+            {
+                if (skillBox.CheckImage(sellectedSkills[i].avatar))
+                {
+                    isExist = true;
+                    skillBox.UpgradeSkill();
+                }
+            }
+            if (!isExist)
+            {
+                skillBoxUICtrls[currentSkillBox].SetSkill(sellectedSkills[i].avatar);
+                currentSkillBox++;
+            }
+            
+            chose = false;
         }
     }
     protected virtual void CloseObj()

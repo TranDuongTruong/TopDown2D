@@ -25,18 +25,42 @@ public class GameManager : SaiMonoBehaviour
     {
         if(playerControler==null) playerControler=Transform.FindObjectOfType<PlayerControler>();
     }
+    protected override void  Awake()
+    {
+        enemySpawner.SpawnEnemy("BlueGhost", 20);
+    }
     private void Update()
     {
         time+=Time.deltaTime;
         if (time >= nextSpawnTime)
         {
-            enemySpawner.SpawnEnemy("BlueGhost",20); // G?i hàm Spawn c?a enemySpawner
+            if (playerControler.PlayerStatus.level == 4)
+            {
+                enemySpawner.SpawnEnemy("GreenGhost", 10); enemySpawner.SpawnEnemy("BlueGhost", 10);
+            }
+            else if (playerControler.PlayerStatus.level == 6)
+            {
+                enemySpawner.SpawnEnemy("GreenGhost", 20);
+                enemySpawner.SpawnEnemy("BlueGhost", 5);
+                enemySpawner.SpawnEnemy("BlackGhost", 5);
+            }
+            else if (playerControler.PlayerStatus.level == 8)
+            {
+                enemySpawner.SpawnEnemy("GoldGhost", 5);
+                enemySpawner.SpawnEnemy("GreenGhost", 20);
+                enemySpawner.SpawnEnemy("BlueGhost", 5);
+                enemySpawner.SpawnEnemy("BlackGhost", 5);
+            }
+            else
+            {
+            enemySpawner.SpawnEnemy("BlueGhost",10);
+            enemySpawner.SpawnEnemy("BlackGhost",10);
 
-            // C?p nh?t th?i ?i?m spawn ti?p theo d?a trên kho?ng th?i gian spawnInterval
-            nextSpawnTime += spawnInterval;
+            }
+            time = 0;
+            nextSpawnTime -= 0.2f;
 
-            // Ki?m tra các ?i?u ki?n khác (2 phút, 4 phút, 5 phút) và g?i hàm Spawn t??ng t?
-            // N?u c?n, b?n có th? s? d?ng c?u trúc if ho?c switch-case ?? xác ??nh th?i ?i?m spawn
+           
         }
     }
 }

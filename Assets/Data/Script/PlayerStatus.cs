@@ -42,7 +42,7 @@ public class PlayerStatus : SaiMonoBehaviour
 
             maxExp *= 2;
 
-            damage *= damage / 3; 
+            damage += damage / 2; 
             hp += maxHp / 2;
             maxHp += maxHp / 2;
             skillPoint++;
