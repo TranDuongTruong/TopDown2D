@@ -5,11 +5,16 @@ using UnityEngine;
 public class PlayerDamageReciver : DamageReceiver
 {
     [SerializeField] public PlayerControler playerControler;
+    [SerializeField] public FXSpawner fxSpawner;
     
     public bool takeDamage=false;
     protected override void OnDead()
     {
-        throw new System.NotImplementedException();
+      Transform deadEffect=  fxSpawner.Spawn("PlayerDead",transform.position,Quaternion.identity);
+        playerControler.transform.localScale=new Vector3(.01f,.01f,.01f);
+        transform.tag = "Player";
+        deadEffect.gameObject.SetActive(true);
+
     }
     public void IncreaseHP(float hp, float maxHp)
     {
@@ -20,7 +25,7 @@ public class PlayerDamageReciver : DamageReceiver
     {
         base.LoadComponents();
         LoadPlayer();
-        
+        fxSpawner=Transform.FindObjectOfType<FXSpawner>();
     }
     public void LoadPlayer()
     {

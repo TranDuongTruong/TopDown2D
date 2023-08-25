@@ -5,10 +5,13 @@ using UnityEngine;
 public class EnemyDamageReciver : DamageReceiver
 {
     public EnemyCtrl enemy;
+
+
     public bool takingDamage=false;
     protected override void LoadComponents()
     {
         base.LoadComponents(); LoadEnemy();
+     
     }
   
     public void LoadEnemy()
@@ -24,6 +27,7 @@ public class EnemyDamageReciver : DamageReceiver
     }
     protected override void OnDead()
     {
+        GameManager.Instance.killCount++;
         //  enemy.animator.SetBool("isDead", true);
         OnDeadDrop();
       //  Destroy(transform.parent.gameObject);

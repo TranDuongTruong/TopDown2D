@@ -8,10 +8,15 @@ public class FinishGateCtrl : SaiMonoBehaviour
 {
     [SerializeField] PlayerControler playerControler;
     [SerializeField] Transform holdPoint;
+    [SerializeField] Transform gate;
 
     [SerializeField] bool isPulling = false; // Bi?n ki?m tra xem có ?ang hút không
     [SerializeField] bool startHold = false; // Bi?n ki?m tra xem có ?ang hút không
 
+    protected override void OnEnable()
+    {
+        gate.gameObject.SetActive(false);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

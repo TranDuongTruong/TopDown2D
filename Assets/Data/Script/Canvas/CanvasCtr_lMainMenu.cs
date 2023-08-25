@@ -21,6 +21,7 @@ public class CanvasCtr_lMainMenu : SaiMonoBehaviour
         researchButton.onClick.AddListener(Research);
         settingButton.onClick.AddListener(Setting);
     }
+    
     protected void PlayGame()
     {
         SceneManager.LoadScene("Main");

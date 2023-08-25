@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class CanvasCtrl : SaiMonoBehaviour
 {
    [SerializeField] PlayerControler playerControler;
     [SerializeField] Slider hpBar, powerBar,expBar;
     [SerializeField] Text xpText, healthText;
     [SerializeField] SkillRandomUI skillRandomUI;
-
+    [SerializeField] public TextMeshProUGUI mainTime;
+    [SerializeField] public float currentTime = 0f;
+    [SerializeField] public GameOverCtrl gameOverCtrl;
     protected override void LoadComponents()
     {
         base.LoadComponents(); LoadPlayer(); LoadSlider(); SetIntialValue();
@@ -30,6 +33,12 @@ public class CanvasCtrl : SaiMonoBehaviour
             if (point.name == "XpBar") expBar = point.GetComponent<Slider>();
             if (point.name == "XpText") xpText = point.GetComponent<Text>();
             if (point.name == "HealthText") healthText = point.GetComponent<Text>();
+            if (point.name == "GameOver" & gameOverCtrl == null)
+            {
+                gameOverCtrl = point.GetComponent<GameOverCtrl>();
+                gameOverCtrl.gameObject.SetActive(false);
+            }
+            if (point.name == "MainTime"&&mainTime==null) mainTime = point.GetComponent<TextMeshProUGUI>();
 
 
         }
@@ -47,35 +56,57 @@ public class CanvasCtrl : SaiMonoBehaviour
     public bool randomSkillsAgain=false;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab) && !skillRandomUI.gameObject.activeSelf)
-        { 
-            activeRandomSkills = true;
-        
+        if (!playerControler.DamageReciver.IsDeads)
+        {
+            UpdateTime();
+            DisplayTime();
+            if (Input.GetKeyDown(KeyCode.Tab) && !skillRandomUI.gameObject.activeSelf)
+            {
+                activeRandomSkills = true;
+
+            }
+
+
+            if (activeRandomSkills)
+            {
+
+                skillRandomUI.gameObject.SetActive(true);
+                skillRandomUI.chose = true;
+                activeRandomSkills = false; Time.timeScale = 0;
+                activeRandomSkills = false;
+
+
+            }
+
+
+
+
+            expBar.value = playerControler.PlayerStatus.exp;
+
+            hpBar.value = playerControler.DamageReciver.HP;
+            powerBar.value = playerControler.power;
+
+            expBar.maxValue = playerControler.PlayerStatus.maxExp;
+
+            xpText.text = (expBar.value + "/" + expBar.maxValue);
+            healthText.text = (hpBar.value + "/" + hpBar.maxValue);
         }
-
-
-        if (activeRandomSkills) {
-           
-            skillRandomUI.gameObject.SetActive(true);
-            skillRandomUI.chose = true;
-            activeRandomSkills = false;  Time.timeScale = 0;
-            activeRandomSkills=false ;
-
-
+        else
+        {
+            gameOverCtrl.gameObject.SetActive(true) ;
         }
-       
+    }
+    private void UpdateTime()
+    {
+        currentTime += Time.deltaTime;
+    }
 
+    private void DisplayTime()
+    {
+        int minutes = Mathf.FloorToInt(currentTime / 60);
+        int seconds = Mathf.FloorToInt(currentTime % 60);
 
-
-        expBar.value = playerControler.PlayerStatus.exp;
-       
-        hpBar.value = playerControler.DamageReciver.HP;
-        powerBar.value = playerControler.power;
-
-        expBar.maxValue = playerControler.PlayerStatus.maxExp;
-        
-        xpText.text=(expBar.value+"/"+expBar.maxValue);
-        healthText.text=(hpBar.value+"/"+hpBar.maxValue);
+        mainTime.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
     public void Tesst()
     {

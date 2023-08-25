@@ -12,6 +12,8 @@ public abstract class DamageReceiver : SaiMonoBehaviour
     [SerializeField] protected float hpMax = 2;
     public float HPMax => hpMax;
     [SerializeField] protected bool isDead = false;
+    public bool IsDeads => isDead;
+    
 
     protected override void OnEnable()
     {
