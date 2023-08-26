@@ -150,6 +150,7 @@ public class PlayerControler : SaiMonoBehaviour
     void OnFire()
     {
         animator.SetTrigger("swordAttack");
+        AudioManager.instance.PlayAudio(AudioManager.instance.attack, 0.04f);
         /*if (damageReciver.takeDamage)
         {
             animator.SetBool("takeDamage", true);

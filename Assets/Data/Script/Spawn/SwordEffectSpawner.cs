@@ -54,10 +54,21 @@ public class SwordEffectSpawner : Spawner
                 if(fileControler != null)
                 {
                     fileControler.spriteRenderer.sprite = sprite.sprite;
+                    fileControler.typeOfFile = name;
                    // Debug.Log(sprite.name);
                 }
             }
-            poolObjs.Clear();
+            foreach (Transform prefab in poolObjs)
+            {
+                FileControler fileControler = prefab.GetComponent<FileControler>();
+                if (fileControler != null)
+                {
+                    fileControler.spriteRenderer.sprite = sprite.sprite;
+                    // Debug.Log(sprite.name);
+                    fileControler.typeOfFile = name;
+                }
+            }
+            //poolObjs.Clear();
         }
     }
 }

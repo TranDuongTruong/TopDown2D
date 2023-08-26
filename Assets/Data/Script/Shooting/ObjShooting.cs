@@ -67,6 +67,7 @@ public class ObjShooting : SaiMonoBehaviour
     }
     public void Shooting(EnemyCtrl enemy, float damage, float speed)
     {
+        AudioManager.instance.PlayAudio(AudioManager.instance.spiritSkill, 0.04f);
         Transform newBullet=spawner.Spawn(bulletName + transform.parent.name, transform.parent.position, Quaternion.identity);
         newBullet.gameObject.SetActive(true);
         BulletControler bulletControler=newBullet.GetComponent<BulletControler>();

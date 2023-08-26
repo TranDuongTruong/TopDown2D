@@ -59,6 +59,7 @@ public class BulletDamageSender : SaiMonoBehaviour
         {
             Transform exploslion = fxSpawner.Spawn("ExplosionEffect", collision.transform.position, Quaternion.identity);
             exploslion.gameObject.SetActive(true);
+            AudioManager.instance.PlayAudio(AudioManager.instance.exploreObj, 0.04f);
         }
     }
 

@@ -24,6 +24,10 @@ public class EffectOfFile : SaiMonoBehaviour
         
             enemyCtrl.EnemyDamageReciver.TakeDamage(damage);
             Transform effect = fxSpawner.Spawn(SwordEffectSpawner.Instance.sprite.name, enemyCtrl.transform.position, Quaternion.identity);
+       /* if (fileControler.typeOfFile == "Ice")
+        {
+            AudioManager.instance.PlayAudio(AudioManager.instance.iceOfFile,0.01f);
+        }*/
         if (effect != null)
         {
             effect.gameObject.SetActive(true);

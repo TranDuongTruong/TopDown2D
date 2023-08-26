@@ -12,6 +12,7 @@ public class FileControler : SaiMonoBehaviour
     public EffectOfFile EffectOfFile => effectOfFile;
     public FileDamageSender FileDamageSender => fileDamageSender;
     public FileDespawn FileDespawn => fileDespawn;
+    public string typeOfFile = "Normal";
     protected override void LoadComponents()
     {
         base.LoadComponents(); LoadFileFly(); LoadSpriteRenderer(); LoadDespawn(); LoadFileDamageSender(); LoadEffectOfFile();
