@@ -41,7 +41,7 @@ public class BulletFly : SaiMonoBehaviour
     }
     private void BulletFlying()
     {
-        if (target == null)
+        if (target == null || target.gameObject.activeSelf == false)
         {
             bulletCtrl.Despawn.DespawnObject();
             return;
@@ -52,7 +52,7 @@ public class BulletFly : SaiMonoBehaviour
     {
         
        
-        if (target == null)
+        if (target == null||target.gameObject.activeSelf==false)
         {
             bulletCtrl.Despawn.DespawnObject();
             return;

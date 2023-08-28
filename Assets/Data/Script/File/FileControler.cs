@@ -9,6 +9,7 @@ public class FileControler : SaiMonoBehaviour
     [SerializeField] protected FileDespawn fileDespawn;
     [SerializeField] protected FileDamageSender fileDamageSender;
     [SerializeField] protected EffectOfFile effectOfFile;
+   
     public EffectOfFile EffectOfFile => effectOfFile;
     public FileDamageSender FileDamageSender => fileDamageSender;
     public FileDespawn FileDespawn => fileDespawn;

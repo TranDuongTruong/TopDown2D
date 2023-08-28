@@ -18,6 +18,7 @@ public class SwordEffectSpawner : Spawner
     public Quaternion rotDownLeft;
     public string effectTop="FileTop";
     public string effectDown="FileDown";
+    
     [SerializeField] protected TypeOfFile  typeOfFile;
     [SerializeField] public SpriteRenderer sprite = new SpriteRenderer();
     protected override void LoadComponents()
@@ -39,9 +40,10 @@ public class SwordEffectSpawner : Spawner
         SetTypeOfEffect("Normal");
 
     }
+    public FileControler[] holderObjs;
     public void SetTypeOfEffect(string name)
     {
-        
+ 
         foreach (SpriteRenderer sprite1 in typeOfFile.TypeOfFiles)
         {
             if (sprite1.name == name) sprite = sprite1;
@@ -55,20 +57,35 @@ public class SwordEffectSpawner : Spawner
                 {
                     fileControler.spriteRenderer.sprite = sprite.sprite;
                     fileControler.typeOfFile = name;
-                   // Debug.Log(sprite.name);
+                   
                 }
             }
-            foreach (Transform prefab in poolObjs)
+          /*  foreach (Transform prefab in poolObjs)
             {
                 FileControler fileControler = prefab.GetComponent<FileControler>();
                 if (fileControler != null)
                 {
                     fileControler.spriteRenderer.sprite = sprite.sprite;
-                    // Debug.Log(sprite.name);
+                    Debug.Log(sprite.name);
                     fileControler.typeOfFile = name;
                 }
+            }*/
+           holderObjs=holder.transform.GetComponentsInChildren<FileControler>();
+            for(int i = 0; i < holderObjs.Length; i++)
+            {
+                
+                
+                //holderObjs[i] = null;
+                Destroy(holderObjs[i].gameObject);
             }
-            //poolObjs.Clear();
+            holderObjs=null;
+          for (int i = 0; i < poolObjs.Count; i++)
+            {
+                Transform obj= poolObjs[i];
+                poolObjs[i]=null;           
+                Destroy(obj.gameObject);
+            }
+            poolObjs.Clear();
         }
     }
 }

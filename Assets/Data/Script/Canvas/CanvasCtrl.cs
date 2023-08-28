@@ -12,6 +12,8 @@ public class CanvasCtrl : SaiMonoBehaviour
     [SerializeField] public TextMeshProUGUI mainTime;
     [SerializeField] public float currentTime = 0f;
     [SerializeField] public GameOverCtrl gameOverCtrl;
+    [SerializeField] public GameWinnerCtrl gameWinnerCtrl;
+    
     protected override void LoadComponents()
     {
         base.LoadComponents(); LoadPlayer(); LoadSlider(); SetIntialValue();
@@ -37,6 +39,11 @@ public class CanvasCtrl : SaiMonoBehaviour
             {
                 gameOverCtrl = point.GetComponent<GameOverCtrl>();
                 gameOverCtrl.gameObject.SetActive(false);
+            }
+            if (point.name == "GameWinner" & gameWinnerCtrl == null)
+            {
+                gameWinnerCtrl = point.GetComponent<GameWinnerCtrl>();
+                gameWinnerCtrl.gameObject.SetActive(false);
             }
             if (point.name == "MainTime"&&mainTime==null) mainTime = point.GetComponent<TextMeshProUGUI>();
 

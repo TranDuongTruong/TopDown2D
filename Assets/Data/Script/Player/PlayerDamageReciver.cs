@@ -10,7 +10,9 @@ public class PlayerDamageReciver : DamageReceiver
     public bool takeDamage=false;
     protected override void OnDead()
     {
-      Transform deadEffect=  fxSpawner.Spawn("PlayerDead",transform.position,Quaternion.identity);
+        AudioManager.instance.StopSound(AudioManager.instance.musicOfLevel);
+        AudioManager.instance.PlayAudio(AudioManager.instance.gameOver, 0.08f);
+        Transform deadEffect=  fxSpawner.Spawn("PlayerDead",transform.position,Quaternion.identity);
         playerControler.transform.localScale=new Vector3(.01f,.01f,.01f);
         transform.tag = "Player";
         deadEffect.gameObject.SetActive(true);

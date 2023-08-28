@@ -11,6 +11,7 @@ public class GameManager : SaiMonoBehaviour
     [SerializeField] protected PlayerControler playerControler;
     [SerializeField] protected FinishGateCtrl finishGateCtrl;
     [SerializeField] protected BossSystem bossSystem;
+    public BossSystem BossSystem => bossSystem;
 
     [SerializeField] public int killCount;
     [SerializeField] protected float time = 0;
@@ -39,6 +40,7 @@ public class GameManager : SaiMonoBehaviour
         instance = this;
         enemySpawner.SpawnEnemy("BlueGhost", 20);
     }
+    int currentCount=10;
     private void Update()
     {
         if (bossSystem.isDead)
@@ -48,6 +50,14 @@ public class GameManager : SaiMonoBehaviour
         else
         {
             time += Time.deltaTime;
+            if (enemySpawner.SpawnedCount <= 0&&time>2)
+            {
+                enemySpawner.SpawnEnemy("GreenGhost", currentCount); enemySpawner.SpawnEnemy("BlueGhost", currentCount);
+
+                currentCount += 3;
+                time = 0;
+
+            }else
             if (time >= nextSpawnTime)
             {
                 if (playerControler.PlayerStatus.level == 4)

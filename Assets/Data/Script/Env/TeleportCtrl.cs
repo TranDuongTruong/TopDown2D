@@ -25,6 +25,7 @@ public class TeleportCtrl : SaiMonoBehaviour
   
   
     public bool canOpen = false;
+    public bool canNextTele = true;
     
 
 
@@ -36,16 +37,25 @@ public class TeleportCtrl : SaiMonoBehaviour
         else canOpen = false;
 
 
-        if (canOpen)
+        if (canOpen &&canNextTele)
         {
-            int index = 0;
-            while (transform==teleportGateCtrl.teleObjs[index])
-             index=Random.Range(0,teleportGateCtrl.teleObjs.Count);
+            if (nextPos != null )
+            {
+                playerControler.transform.position = new Vector2(nextPos.position.x, nextPos.position.y);
 
-               playerControler.transform.position = new Vector2(teleportGateCtrl.teleObjs[index].position.x, teleportGateCtrl.teleObjs[index].position.y);
-         //   playerControler.transform.position = nextPos.position;
+            }
+            else
+            {
+                int index = 0;
+                while (transform == teleportGateCtrl.teleObjs[index])
+                    index = Random.Range(0, teleportGateCtrl.teleObjs.Count);
+
+                playerControler.transform.position = new Vector2(teleportGateCtrl.teleObjs[index].position.x, teleportGateCtrl.teleObjs[index].position.y);
+                //   playerControler.transform.position = nextPos.position;
+            }
             canOpen = false;
             playerControler = null;
+            canNextTele = false;
         }
         
     }
