@@ -31,7 +31,7 @@ public class Inventory : SaiMonoBehaviour
     public virtual bool AddAbility(ItemInventory itemPicked)
     {
         if (playerControler == null) return false;
-        Debug.Log("xxx");
+     
         playerControler.PlayerStatus.GetAbility(itemPicked.itemProfile.itemStatus);
         return true;
     }

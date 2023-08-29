@@ -7,6 +7,7 @@ public class SkillCtrl_MainMenu : SaiMonoBehaviour
 {
     [SerializeField] protected Image avatar;
     public SkillCode skillCode;
+    public bool isActive=false;
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -14,9 +15,8 @@ public class SkillCtrl_MainMenu : SaiMonoBehaviour
     }
     public void ActiveSkill(SkillCode skillCode)
     {
-        if (skillCode == this.skillCode)
-        {
+        isActive = true;
             avatar.color = Color.white;
-        }
+        
     }
 }

@@ -7,6 +7,7 @@ public class SkillSystem_MainMenu : SaiMonoBehaviour
 {
     [SerializeField] public List<SkillCtrl_MainMenu> skillCtrl_Mains;
     [SerializeField] public Button researchCloseButton;
+    [SerializeField] public ResearchSkillCtrl researchSkillCtrl;
     protected override void LoadComponents()
     {
         base.LoadComponents(); LoadSkill(); LoadnButton();
@@ -38,5 +39,23 @@ public class SkillSystem_MainMenu : SaiMonoBehaviour
 
 
         }
+    }
+    protected override void OnEnable()
+    {
+        LoadResearch();
+    }
+    private void LoadResearch()
+    {
+        foreach (SkillProfile profile in researchSkillCtrl.skillList)
+        {
+                foreach(SkillCtrl_MainMenu skillCtrl in skillCtrl_Mains)
+                {
+                    if(skillCtrl.skillCode == profile.skillCode&&!skillCtrl.isActive)
+                {
+                    skillCtrl.ActiveSkill(profile.skillCode);
+                }
+                }
+        }
+        
     }
 }

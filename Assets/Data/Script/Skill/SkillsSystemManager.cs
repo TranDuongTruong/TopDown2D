@@ -8,13 +8,14 @@ public class SkillsSystemManager : SaiMonoBehaviour
     public static SkillsSystemManager Instance => instance;
     [SerializeField] protected List<SkillCtrl> skillCtrlList = new List<SkillCtrl>();
     [SerializeField] protected int numOfSkillToRandom = 3;
+    [SerializeField] protected ResearchSkillCtrl researchSkillCtrl;
     protected override void LoadComponents()
     {
         
         base.LoadComponents(); LoadSkillList();
 
     }
-    private void Awake()
+    protected override void Awake()
     {
         instance = this;
     }
@@ -29,7 +30,6 @@ public class SkillsSystemManager : SaiMonoBehaviour
     }
 
 
-    // Thêm method ?? random 2 skill ch?a ??t level max
     protected List<SkillCtrl> GetRandomUnmaxedSkills()
     {
         List<SkillCtrl> unmaxedSkills = new List<SkillCtrl>();
@@ -42,7 +42,6 @@ public class SkillsSystemManager : SaiMonoBehaviour
             }
         }
 
-        // S? d?ng hàm UnityEngine.Random ?? random 2 skill t? danh sách ch?a ??t level max
         List<SkillCtrl> selectedSkills = new List<SkillCtrl>();
         int count = unmaxedSkills.Count;
         if (count <= numOfSkillToRandom)
@@ -66,7 +65,7 @@ public class SkillsSystemManager : SaiMonoBehaviour
         return selectedSkills;
     }
 
-    // G?i method này ?? l?y ra 2 skill ch?a ??t level max
+
     public List<SkillCtrl> GetThreeRandomUnmaxedSkills()
     {
         List<SkillCtrl> selectedSkills = GetRandomUnmaxedSkills();
@@ -82,5 +81,13 @@ public class SkillsSystemManager : SaiMonoBehaviour
                 skillCtrl.isActive = true;
             }
         }
+        foreach(SkillProfile skill in researchSkillCtrl.skillList)
+        {
+            if (skill.skillCode.ToString() == name)
+            {
+                skill.SkillSO = SkillSO.Acctive;
+            }
+        }
+
     }
 }

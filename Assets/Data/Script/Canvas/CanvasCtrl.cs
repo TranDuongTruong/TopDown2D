@@ -13,6 +13,7 @@ public class CanvasCtrl : SaiMonoBehaviour
     [SerializeField] public float currentTime = 0f;
     [SerializeField] public GameOverCtrl gameOverCtrl;
     [SerializeField] public GameWinnerCtrl gameWinnerCtrl;
+    [SerializeField] public PausePanelCtrl pausePanelCtrl;
     
     protected override void LoadComponents()
     {
@@ -65,6 +66,12 @@ public class CanvasCtrl : SaiMonoBehaviour
     {
         if (!playerControler.DamageReciver.IsDeads)
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Time.timeScale = 0;
+                pausePanelCtrl.gameObject.SetActive(true);
+               
+            }
             UpdateTime();
             DisplayTime();
             if (Input.GetKeyDown(KeyCode.Tab) && !skillRandomUI.gameObject.activeSelf)

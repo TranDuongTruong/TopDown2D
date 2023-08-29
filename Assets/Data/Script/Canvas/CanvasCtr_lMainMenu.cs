@@ -11,6 +11,7 @@ public class CanvasCtr_lMainMenu : SaiMonoBehaviour
     
     [SerializeField] public Button settingButton;
     [SerializeField] public SkillSystem_MainMenu skillSystem;
+    [SerializeField] public SettingPanel settingPanel;
     protected override void LoadComponents()
     {
         base.LoadComponents(); LoadnButton(); LoadSkillSystem();
@@ -20,6 +21,7 @@ public class CanvasCtr_lMainMenu : SaiMonoBehaviour
         playButton.onClick.AddListener(PlayGame);
         researchButton.onClick.AddListener(Research);
         settingButton.onClick.AddListener(Setting);
+
     }
     
     protected void PlayGame()
@@ -28,7 +30,8 @@ public class CanvasCtr_lMainMenu : SaiMonoBehaviour
     }
     protected void Setting()
     {
-        Debug.Log("aaa");
+        Time.timeScale = 0;
+        settingPanel.gameObject.SetActive(true);
     }
     protected void Research()
     {

@@ -42,13 +42,15 @@ public class AudioManager : MonoBehaviour
     private AudioSource musicOfLevelSource;
     public AudioClip gameOver;
     private AudioSource gameOverSource;
-
+    [SerializeField] public List<AudioSource> curentAudioSources;
+    [SerializeField] public AudioSO audioSO;
 
 
     private void Awake()
     {
         instance = this;
        PlayAudio(AudioManager.instance.musicOfLevel, 0.015f,true);
+       SetVolume(audioSO.volume);
     }
     public void PlayAudio(AudioClip clip, float volume, bool isLoopBack)
     {
@@ -247,7 +249,39 @@ public class AudioManager : MonoBehaviour
         audioSource.loop = isLoopBack;
         audioSource.clip = clip;
         audioSource.Play();
+        curentAudioSources.Add(audioSource);
+        SetVolume(attackSource,audioSO.volume);
         Destroy(audioSource.gameObject, audioSource.clip.length);
+    }
+    private void Update()
+    {
+        /*for (int i = 0; i < curentAudioSources.Count; i++)
+        {
+            if (curentAudioSources[i] == null)
+            {
+                curentAudioSources.Remove(curentAudioSources[i]); i--;
+               // SetVolume(curentAudioSources[i], -audioSO.volume);
+
+             }
+        }*/
+        
+    }
+
+    public void SetVolume( float volume)
+    {
+       foreach(AudioSource audioSource in curentAudioSources)
+        {
+            SetVolume(audioSource, volume);
+        }
+       
+    }
+
+    private void SetVolume(AudioSource audioSource, float volume)
+    {
+        if (audioSource != null)
+        {
+            audioSource.volume += volume;
+        }
     }
     private void Play2(AudioClip clip, ref AudioSource audioSource, float volume, bool isLoopBack = false)
     {
