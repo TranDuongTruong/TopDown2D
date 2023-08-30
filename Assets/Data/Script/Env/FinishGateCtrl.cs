@@ -9,10 +9,15 @@ public class FinishGateCtrl : SaiMonoBehaviour
     [SerializeField] PlayerControler playerControler;
     [SerializeField] Transform holdPoint;
     [SerializeField] Transform gate;
+    [SerializeField] CanvasCtrl canvasCtrl;
 
     [SerializeField] bool isPulling = false; // Bi?n ki?m tra xem có ?ang hút không
     [SerializeField] bool startHold = false; // Bi?n ki?m tra xem có ?ang hút không
-
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        canvasCtrl=Transform.FindObjectOfType<CanvasCtrl>();
+    }
     protected override void OnEnable()
     {
         gate.gameObject.SetActive(false);
@@ -40,12 +45,11 @@ public class FinishGateCtrl : SaiMonoBehaviour
         if(startHold)
         if (isPulling)
         {
-            playerControler.moveSpeed = 500;
+
+            canvasCtrl.gameWinnerCtrl.gameObject.SetActive(true);
+            
         }
-            else
-            {
-                SceneManager.LoadScene("MainMenu");
-            }
+            
     }
 }
 

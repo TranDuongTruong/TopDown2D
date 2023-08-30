@@ -34,6 +34,7 @@ public class BossSystem : SaiMonoBehaviour
         numOfBoss = num;
         num= 0;
         isDead = CheckAllBoss();
+        if (isDead) EnemySpawner.Instance.CanSpawn = false;
     }
     private bool CheckAllBoss()
     {

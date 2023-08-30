@@ -15,6 +15,10 @@ public class GameWinnerCtrl : SaiMonoBehaviour
     [SerializeField] Button nextBtn;
     [SerializeField] Button replayBtn;
 
+    protected override void OnEnable()
+    {
+        
+    }
     protected override void LoadComponents()
     {
         base.LoadComponents(); LoadComponent();
@@ -28,7 +32,7 @@ public class GameWinnerCtrl : SaiMonoBehaviour
     public void LoadNextLVL()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("LV2");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Replay()

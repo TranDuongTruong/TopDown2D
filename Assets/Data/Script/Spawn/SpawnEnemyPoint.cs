@@ -8,8 +8,8 @@ public class SpawnEnemyPoint : SaiMonoBehaviour
     [SerializeField] protected bool canSpawn=false;
     [SerializeField] protected List<string> enemyNames = new List<string>();
     [SerializeField] public PointCtrl pointCtrl;
-    [SerializeField] protected int numOfSpawn = 1;
-    [SerializeField] protected int spawnCount = 0;
+    [SerializeField] protected int numOfSpawn = 2;
+    [SerializeField] protected int spawnCount = 2;
 
     protected List<GameObject> spawnedEnemies = new List<GameObject>();
     protected override void LoadComponents()
@@ -24,23 +24,22 @@ public class SpawnEnemyPoint : SaiMonoBehaviour
     }
     private void Update()
     {
-        if (!canSpawn || numOfSpawn <= 0)
-        {
-            return;
-        }
+        
+      if(canSpawn&&numOfSpawn>0)  SpawnEnemy();
+      
+    }
 
+    private void SpawnEnemy()
+    {
         for (int i = 0; i < spawnCount; i++)
         {
-            // Ch?n m?t enemyName ng?u nhiên trong danh sách
             string randomEnemyName = enemyNames[Random.Range(0, enemyNames.Count)];
-
-             enemySpawner.SpawnEnemy(randomEnemyName, i,pointCtrl.Waypoints);
-           // spawnedEnemies.Add(spawnedEnemy.gameObject);
-           
-        } 
-        canSpawn = false;
+         
+            enemySpawner.SpawnEnemy(randomEnemyName, spawnCount, pointCtrl.Waypoints);
+        }
         numOfSpawn--;
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
