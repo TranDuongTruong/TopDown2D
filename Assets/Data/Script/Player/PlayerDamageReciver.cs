@@ -37,7 +37,8 @@ public class PlayerDamageReciver : DamageReceiver
     public void TakeDamage(float damage)
     {
         takeDamage= true;
-        playerControler.animator.SetBool("tookDamage", true);
+        if (playerControler.animator == null) return;
+        playerControler.animator.SetBool("takeDamage", true);
         this.Deduct(damage);
        
 

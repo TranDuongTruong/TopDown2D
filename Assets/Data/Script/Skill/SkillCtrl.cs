@@ -12,6 +12,7 @@ public class SkillCtrl : SaiMonoBehaviour
     [SerializeField] public bool isActive = false;
     [SerializeField] public TextMeshPro content;
     [SerializeField] public Image avatar;
+    [SerializeField] public SkillCode skillCode;
 
     protected override void LoadComponents()
     {

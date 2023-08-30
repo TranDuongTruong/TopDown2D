@@ -44,17 +44,29 @@ public class SkillSystem_MainMenu : SaiMonoBehaviour
     {
         LoadResearch();
     }
+
     private void LoadResearch()
     {
         foreach (SkillProfile profile in researchSkillCtrl.skillList)
         {
-                foreach(SkillCtrl_MainMenu skillCtrl in skillCtrl_Mains)
+         /*   if (profile.skillCode == SkillCode.Laser)
+            {
+                Debug.LogWarning(profile.SkillSO + "/ " + profile.skillCode);
+            }*/
+            if (profile.SkillSO == SkillSO.Acctive)
+            {
+                foreach (SkillCtrl_MainMenu skillCtrl in skillCtrl_Mains)
                 {
-                    if(skillCtrl.skillCode == profile.skillCode&&!skillCtrl.isActive)
-                {
-                    skillCtrl.ActiveSkill(profile.skillCode);
+                    if (skillCtrl.skillCode == profile.skillCode && !skillCtrl.isActive)
+                    {
+                        if (profile.SkillSO == SkillSO.Acctive)
+                            skillCtrl.ActiveSkill();
+
+
+                    }
                 }
-                }
+               // Debug.LogWarning(profile.SkillSO + "/ " + profile.skillCode);
+            }
         }
         
     }

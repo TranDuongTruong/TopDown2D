@@ -4,14 +4,14 @@ using UnityEngine;
 public enum SkillCode
 {
     NoSkill=0,
-    Laser,
-    Sipirt,
-    Rocket,
-    Fire,
-    Ice,
-    Posion,
-    Electric,
-    Ball,
+    Laser=1,
+    Sipirt=2,
+    Rocket=3,
+    FireFile=4,
+    IceFile=5,
+    PosionFile=6,
+    Electric=7,
+    Ball=8,
 }
 
 public class SkillCodeParser

@@ -12,6 +12,7 @@ public class CanvasCtr_lMainMenu : SaiMonoBehaviour
     [SerializeField] public Button settingButton;
     [SerializeField] public SkillSystem_MainMenu skillSystem;
     [SerializeField] public SettingPanel settingPanel;
+    [SerializeField] public ChosingMapCtrl chosingMap;
     protected override void LoadComponents()
     {
         base.LoadComponents(); LoadnButton(); LoadSkillSystem();
@@ -26,7 +27,7 @@ public class CanvasCtr_lMainMenu : SaiMonoBehaviour
     
     protected void PlayGame()
     {
-        SceneManager.LoadScene("Main");
+        chosingMap.gameObject.SetActive(true);
     }
     protected void Setting()
     {

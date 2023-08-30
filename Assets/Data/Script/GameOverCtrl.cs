@@ -13,7 +13,8 @@ public class GameOverCtrl : SaiMonoBehaviour
     [SerializeField] TextMeshProUGUI  content;
     [SerializeField] Button continueBtn;
     [SerializeField] Button replayBtn;
-
+    [SerializeField] string nameScene="LV1";
+    
     protected override void LoadComponents()
     {
         base.LoadComponents(); LoadComponent();
@@ -33,7 +34,7 @@ public class GameOverCtrl : SaiMonoBehaviour
     public void Replay()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene(nameScene);
     }
     protected virtual void LoadComponent()
     {

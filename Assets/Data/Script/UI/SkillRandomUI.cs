@@ -114,7 +114,7 @@ public class SkillRandomUI : SaiMonoBehaviour
             if (playerControler.PlayerStatus.skillPoint == 0) return;
            
             playerControler.PlayerStatus.skillPoint -= 1;
-            skillsSystem.SelectSkill(sellectedSkills[i].name);
+            skillsSystem.SelectSkill(sellectedSkills[i].name,sellectedSkills[i].skillCode);
             bool isExist = false;
 
             foreach(SkillBoxUICtrl skillBox in skillBoxUICtrls)

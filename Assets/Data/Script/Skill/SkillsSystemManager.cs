@@ -9,6 +9,7 @@ public class SkillsSystemManager : SaiMonoBehaviour
     [SerializeField] protected List<SkillCtrl> skillCtrlList = new List<SkillCtrl>();
     [SerializeField] protected int numOfSkillToRandom = 3;
     [SerializeField] protected ResearchSkillCtrl researchSkillCtrl;
+    public bool reset=false;
     protected override void LoadComponents()
     {
         
@@ -28,7 +29,20 @@ public class SkillsSystemManager : SaiMonoBehaviour
             skillCtrlList.Add(skillCtrl);
         }
     }
-
+    private void Update()
+    {
+        if (reset)
+        {
+            foreach (SkillProfile skill in researchSkillCtrl.skillList)
+            {
+               
+                
+                    skill.SkillSO = SkillSO.InActive;
+                
+            }
+            reset= false;
+        }
+    }
 
     protected List<SkillCtrl> GetRandomUnmaxedSkills()
     {
@@ -72,22 +86,25 @@ public class SkillsSystemManager : SaiMonoBehaviour
 
         return selectedSkills;
     }
-    public void SelectSkill(string name)
+    public void SelectSkill(string name, SkillCode skillCode)
     {
         foreach(SkillCtrl skillCtrl in skillCtrlList)
         {
             if (skillCtrl.name == name)
             {
                 skillCtrl.isActive = true;
+
             }
         }
         foreach(SkillProfile skill in researchSkillCtrl.skillList)
         {
-            if (skill.skillCode.ToString() == name)
+            if (skill.skillCode ==skillCode)
             {
                 skill.SkillSO = SkillSO.Acctive;
+                Debug.Log(skill.name);
             }
+            else Debug.Log("AA" + skill.name + "    " + skill.skillCode.ToString() + "      n: " + name);
         }
-
+        
     }
 }

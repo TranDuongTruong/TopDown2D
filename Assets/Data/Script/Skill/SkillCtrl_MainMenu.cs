@@ -11,12 +11,21 @@ public class SkillCtrl_MainMenu : SaiMonoBehaviour
     protected override void LoadComponents()
     {
         base.LoadComponents();
+        if(avatar==null)    
         avatar = GetComponent<Image>();
     }
-    public void ActiveSkill(SkillCode skillCode)
+    public void ActiveSkill()
     {
         isActive = true;
-            avatar.color = Color.white;
-        
+        avatar.color = Color.white;
+
+      //  Debug.LogError("iiiiiaaa" + this.skillCode.ToString());
+    }
+    public void InActiveSkill()
+    {
+        isActive = false;
+        avatar.color = Color.black;
+       // Debug.LogError("aaa" + this.skillCode.ToString());
+
     }
 }

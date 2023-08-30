@@ -62,11 +62,11 @@ public class GameManager : SaiMonoBehaviour
             {
                 if (playerControler.PlayerStatus.level == 4)
                 {
-                    enemySpawner.SpawnEnemy("GreenGhost", 10); enemySpawner.SpawnEnemy("BlueGhost", 10);
+                    enemySpawner.SpawnEnemy("GreenGhost", 5); enemySpawner.SpawnEnemy("BlueGhost", 5);
                 }
                 else if (playerControler.PlayerStatus.level == 6)
                 {
-                    enemySpawner.SpawnEnemy("GreenGhost", 20);
+                    enemySpawner.SpawnEnemy("GreenGhost", 10);
                     enemySpawner.SpawnEnemy("BlueGhost", 5);
                     enemySpawner.SpawnEnemy("BlackGhost", 5);
                 }
@@ -79,8 +79,8 @@ public class GameManager : SaiMonoBehaviour
                 }
                 else
                 {
-                    enemySpawner.SpawnEnemy("BlueGhost", 10);
-                    enemySpawner.SpawnEnemy("BlackGhost", 10);
+                    enemySpawner.SpawnEnemy("BlueGhost", 2);
+                    enemySpawner.SpawnEnemy("BlackGhost", 3);
 
                 }
                 time = 0;
